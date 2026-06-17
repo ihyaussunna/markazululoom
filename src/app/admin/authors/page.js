@@ -24,8 +24,8 @@ export default async function AuthorsPage() {
               <input type="text" id="name" name="name" required style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexGrow: 1 }}>
-              <label htmlFor="profileImageUrl" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Profile Image URL (Optional)</label>
-              <input type="url" id="profileImageUrl" name="profileImageUrl" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <label htmlFor="profileImage" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Profile Image (Upload)</label>
+              <input type="file" id="profileImage" name="profileImage" accept="image/*" style={{ padding: '0.7rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>

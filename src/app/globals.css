@@ -6,30 +6,41 @@
   --text-primary: #0f172a;
   --text-secondary: #475569;
   
-  --primary-color: #1d3557;      /* Darker logo blue */
-  --secondary-color: #457b9d;    /* Mid logo blue */
-  --accent-color: #009ee3;       /* Light logo blue */
+  --primary-color: #2563eb;      
+  --secondary-color: #3b82f6;    
+  --accent-color: #60a5fa;       
   --border-color: #e2e8f0;
 
   --nav-bg: #ffffff;
-  --footer-bg: #1d3557;
+  --nav-bg-rgb: 255, 255, 255;
+  --footer-bg: #0f172a;
   --footer-text: #f1f5f9;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --radius-lg: 12px;
 }
 
 [data-theme='dark'] {
-  --bg-color: #0f172a;
-  --surface-color: #1e293b;
+  --bg-color: #020617;
+  --surface-color: #0f172a;
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   
-  --primary-color: #a8dadc;      
-  --secondary-color: #457b9d;    
-  --accent-color: #009ee3;       
-  --border-color: #334155;
+  --primary-color: #3b82f6;      
+  --secondary-color: #60a5fa;    
+  --accent-color: #93c5fd;       
+  --border-color: #1e293b;
 
-  --nav-bg: #1e293b;
-  --footer-bg: #0b1120;
+  --nav-bg: #0f172a;
+  --nav-bg-rgb: 15, 23, 42;
+  --footer-bg: #020617;
   --footer-text: #94a3b8;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
 }
 
 html {
