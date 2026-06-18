@@ -19,7 +19,7 @@ model Category {
 model Author {
   id             String   @id @default(cuid())
   name           String
-  bio            String?
+  bio            String?  @db.Text
   profileImageUrl String?
   posts          Post[]
   createdAt      DateTime @default(now())
@@ -30,8 +30,8 @@ model Post {
   id          String   @id @default(cuid())
   title       String
   slug        String   @unique
-  content     String
-  excerpt     String?
+  content     String   @db.LongText
+  excerpt     String?  @db.Text
   imageUrl    String?
   videoUrl    String?
   categoryId  String
