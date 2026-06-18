@@ -91,8 +91,8 @@ export default async function PostsPage() {
           {posts.map((post) => (
             <tr key={post.id}>
               <td style={{ maxWidth: '250px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{post.title}</td>
-              <td>{post.category.name}</td>
-              <td>{post.author.name}</td>
+              <td>{post.category?.name || 'Uncategorized'}</td>
+              <td>{post.author?.name || 'Unknown Author'}</td>
               <td>{post.published ? 'Published' : 'Draft'}</td>
               <td>
                 <div className={styles.actions}>
