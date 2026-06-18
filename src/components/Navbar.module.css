@@ -36,8 +36,9 @@
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   /* Prevent image selection */
   user-select: none; 
   -webkit-user-drag: none;
