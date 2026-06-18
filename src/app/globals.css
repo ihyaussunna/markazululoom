@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;600;800&display=swap');
 
 :root {
   --bg-color: #f8fafc;
@@ -58,7 +58,7 @@ body {
   flex-direction: column;
   color: var(--text-primary);
   background-color: var(--bg-color);
-  font-family: 'Outfit', 'Manjari', sans-serif;
+  font-family: 'Outfit', 'Anek Malayalam', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
