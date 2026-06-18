@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { createPost, deletePost, togglePostStatus } from '@/app/actions/post';
+import Link from 'next/link';
 import styles from '../admin.module.css';
 
 export const dynamic = 'force-dynamic';
