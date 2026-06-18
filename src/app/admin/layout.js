@@ -15,6 +15,7 @@ export default function AdminLayout({ children }) {
           <Link href="/admin/posts">Posts</Link>
           <Link href="/admin/categories">Categories</Link>
           <Link href="/admin/authors">Authors</Link>
+          <Link href="/admin/settings">Site Settings</Link>
           <Link href="/" target="_blank">View Site</Link>
         </nav>
         <form action={logout} className={styles.logoutForm}>

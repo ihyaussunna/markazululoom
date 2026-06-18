@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import styles from './home.module.css';
+import BannerCarousel from '@/components/BannerCarousel';
 
 export default async function HomePage() {
   const latestPosts = await prisma.post.findMany({
@@ -10,11 +11,18 @@ export default async function HomePage() {
     take: 12
   });
 
+  const activeBanners = await prisma.banner.findMany({
+    where: { isActive: true },
+    orderBy: { order: 'asc' }
+  });
+
   const featuredPost = latestPosts[0];
   const gridPosts = latestPosts.slice(1);
 
   return (
     <div className={`container ${styles.homeContainer}`}>
+      <BannerCarousel banners={activeBanners} />
+      
       {featuredPost && (
         <section className={styles.featuredSection}>
           <div className={styles.featuredImage}>

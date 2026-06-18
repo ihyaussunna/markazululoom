@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma';
-import { createPost, deletePost } from '@/app/actions/post';
+import { createPost, deletePost, togglePostStatus } from '@/app/actions/post';
 import styles from '../admin.module.css';
 
 export const dynamic = 'force-dynamic';
@@ -96,7 +96,17 @@ export default async function PostsPage() {
                 <td>{post.author?.name || 'Unknown Author'}</td>
                 <td>{post.published ? 'Published' : 'Draft'}</td>
                 <td>
-                  <div className={styles.actions}>
+                  <div className={styles.actions} style={{ display: 'flex', gap: '0.5rem' }}>
+                    <form action={togglePostStatus}>
+                      <input type="hidden" name="id" value={post.id} />
+                      <input type="hidden" name="published" value={post.published.toString()} />
+                      <button type="submit" style={{ padding: '0.4rem 0.8rem', borderRadius: '4px', backgroundColor: post.published ? '#10b981' : '#6b7280', color: 'white', fontSize: '0.8rem' }}>
+                        {post.published ? 'Make Private' : 'Make Public'}
+                      </button>
+                    </form>
+                    <Link href={`/admin/posts/${post.id}/edit`} style={{ padding: '0.4rem 0.8rem', borderRadius: '4px', backgroundColor: 'var(--primary-color)', color: 'white', fontSize: '0.8rem', textDecoration: 'none' }}>
+                      Edit
+                    </Link>
                     <form action={deletePost}>
                       <input type="hidden" name="id" value={post.id} />
                       <button type="submit" className={styles.deleteBtn}>Delete</button>
