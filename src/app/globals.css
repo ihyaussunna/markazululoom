@@ -58,7 +58,7 @@ body {
   flex-direction: column;
   color: var(--text-primary);
   background-color: var(--bg-color);
-  font-family: var(--font-title-dynamic), sans-serif;
+  font-family: 'Outfit', 'Anek Malayalam', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
