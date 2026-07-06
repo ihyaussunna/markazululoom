@@ -15,7 +15,7 @@ export default function CommentsClient() {
 
   const fetchComments = async () => {
     try {
-      const res = await fetch('/api/admin/comments');
+      const res = await fetch('/api/admin/comments', { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
         setComments(data.comments);
