@@ -1,46 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;600;800&display=swap');
 
 :root {
-  --bg-color: #f8fafc;
-  --surface-color: #ffffff;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
+  --bg-color: #F5F5F7;
+  --surface-color: #FFFFFF;
+  --text-primary: #1D1D1F;
+  --text-secondary: #86868B;
   
-  --primary-color: #003DA5;      
-  --secondary-color: #0A3F98;    
-  --accent-color: #4A7DD8;       
-  --border-color: #e2e8f0;
+  --primary-color: #0066CC;      
+  --secondary-color: #2997FF;    
+  --accent-color: #5E5E60;       
+  --border-color: #D2D2D7;
 
-  --nav-bg: #ffffff;
+  --nav-bg: #FFFFFF;
   --nav-bg-rgb: 255, 255, 255;
-  --footer-bg: #0f172a;
-  --footer-text: #f1f5f9;
+  --footer-bg: #F5F5F7;
+  --footer-text: #1D1D1F;
 
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --radius-lg: 12px;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px 0 rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.1);
+  --radius-lg: 18px;
 }
 
 [data-theme='dark'] {
-  --bg-color: #020617;
-  --surface-color: #0f172a;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
+  --bg-color: #000000;
+  --surface-color: #1C1C1E;
+  --text-primary: #F5F5F7;
+  --text-secondary: #A1A1A6;
   
-  --primary-color: #3b82f6;      
-  --secondary-color: #60a5fa;    
-  --accent-color: #93c5fd;       
-  --border-color: #1e293b;
+  --primary-color: #2997FF;      
+  --secondary-color: #0A84FF;    
+  --accent-color: #86868B;       
+  --border-color: #38383A;
 
-  --nav-bg: #0f172a;
-  --nav-bg-rgb: 15, 23, 42;
-  --footer-bg: #020617;
-  --footer-text: #94a3b8;
+  --nav-bg: #000000;
+  --nav-bg-rgb: 0, 0, 0;
+  --footer-bg: #1C1C1E;
+  --footer-text: #F5F5F7;
 
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --shadow-sm: 0 1px 2px 0 rgba(255, 255, 255, 0.04);
+  --shadow-md: 0 4px 12px 0 rgba(255, 255, 255, 0.08);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
 
 html {
