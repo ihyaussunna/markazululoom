@@ -7,6 +7,12 @@
   text-align: center;
 }
 
+@media (max-width: 768px) {
+  .header {
+    padding: 2rem 0 1rem;
+  }
+}
+
 .categoryLabel {
   display: inline-block;
   font-size: 0.85rem;
@@ -127,6 +133,13 @@
   overflow-wrap: break-word;
 }
 
+@media (max-width: 768px) {
+  .content {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
 .content p {
   margin-bottom: 1.5rem;
 }
@@ -200,5 +213,18 @@
 @media (max-width: 768px) {
   .title {
     font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+  }
+  .article {
+    padding-bottom: 3rem;
+  }
+  .authorBioCard {
+    padding: 1.5rem;
+    margin-top: 2rem;
   }
 }

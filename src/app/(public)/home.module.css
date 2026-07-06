@@ -20,6 +20,17 @@
   }
 }
 
+@media (max-width: 768px) {
+  .homeContainer {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+  .featuredSection {
+    margin-bottom: 2rem;
+    gap: 1rem;
+  }
+}
+
 .featuredImage {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -53,6 +64,12 @@
   justify-content: center;
 }
 
+@media (max-width: 768px) {
+  .featuredContent {
+    padding: 1.5rem;
+  }
+}
+
 .categoryLabel {
   font-size: 0.8rem;
   font-weight: 700;
@@ -70,6 +87,12 @@
   margin-bottom: 1rem;
   color: var(--text-primary);
   transition: color 0.2s;
+}
+
+@media (max-width: 768px) {
+  .featuredTitle {
+    font-size: 1.6rem;
+  }
 }
 
 .featuredTitle:hover {
@@ -99,6 +122,13 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
+}
+
+@media (max-width: 480px) {
+  .postGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 .postCard {
