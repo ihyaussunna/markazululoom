@@ -6,8 +6,10 @@ export default function AdminLayout({ children }) {
   return (
     <div className={styles.adminContainer}>
       <aside className={styles.sidebar}>
-        <div className={styles.logo}>
-          <h2>Markazul Uloom</h2>
+        <div className={styles.sidebarHeader}>
+          <Link href="/admin">
+            <h2>Globeats</h2>
+          </Link>
           <p>Admin Panel</p>
         </div>
         <nav className={styles.nav}>

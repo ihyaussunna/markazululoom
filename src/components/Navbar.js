@@ -14,9 +14,9 @@ export default async function Navbar() {
     <header className={styles.header}>
       <div className={`container ${styles.navContainer}`}>
         <Link href="/" className={styles.logo}>
-          <div className={styles.animatedLogoContainer}>
-            <img className={`${styles.logoImage} ${styles.logoMl}`} src="/logo-ml.svg" alt="Markazul Uloom" />
-            <img className={`${styles.logoImage} ${styles.logoEn}`} src="/logo-en.svg" alt="Markazul Uloom" />
+          <div className={styles.logoContainer}>
+            <img className={styles.logoImageLight} src="/logo.png" alt="Globeats" />
+            <img className={styles.logoImageDark} src="/logo-white.png" alt="Globeats" />
           </div>
         </Link>
         <NavbarClient categories={categories} />

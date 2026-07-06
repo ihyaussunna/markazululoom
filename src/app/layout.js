@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { fklDhikk, outfit } from '@/lib/fonts';
 
 export const metadata = {
-  title: "Markazul Uloom - Malayalam Blog",
+  title: "Globeats",
   description: "The ultimate destination for Malayalam blogs, essays, and literature.",
 };
 

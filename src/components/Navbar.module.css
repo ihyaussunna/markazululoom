@@ -22,20 +22,16 @@
   z-index: 102;
 }
 
-.animatedLogoContainer {
+.logoContainer {
   position: relative;
-  width: 180px;
-  height: 40px;
+  width: 140px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 
-.logoImage {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
+.logoImageLight, .logoImageDark {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -44,24 +40,20 @@
   -webkit-user-drag: none;
 }
 
-.logoMl {
-  animation: fade-logo-ml 6s infinite ease-in-out;
+.logoImageLight {
+  display: block;
 }
 
-.logoEn {
-  animation: fade-logo-en 6s infinite ease-in-out;
+.logoImageDark {
+  display: none;
 }
 
-@keyframes fade-logo-ml {
-  0%, 40% { opacity: 1; }
-  50%, 90% { opacity: 0; }
-  100% { opacity: 1; }
+:global([data-theme='dark']) .logoImageLight {
+  display: none;
 }
 
-@keyframes fade-logo-en {
-  0%, 40% { opacity: 0; }
-  50%, 90% { opacity: 1; }
-  100% { opacity: 0; }
+:global([data-theme='dark']) .logoImageDark {
+  display: block;
 }
 
 .navLinks {
