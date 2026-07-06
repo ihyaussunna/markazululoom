@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import styles from './Footer.module.css';
+import { prisma } from '@/lib/prisma';
 
-export default function Footer() {
+export default async function Footer() {
+  const categories = await prisma.category.findMany({ take: 6 });
+
   return (
     <footer className={styles.footer}>
       <div className="container">
@@ -17,6 +20,11 @@ export default function Footer() {
             <h3>Quick Links</h3>
             <ul>
               <li><Link href="/">Home</Link></li>
+              {categories.map(category => (
+                <li key={category.id}>
+                  <Link href={`/category/${category.slug}`}>{category.name}</Link>
+                </li>
+              ))}
             </ul>
           </div>
           
