@@ -15,6 +15,7 @@ export default function AdminLayout({ children }) {
         <nav className={styles.nav}>
           <Link href="/admin">Dashboard</Link>
           <Link href="/admin/posts">Posts</Link>
+          <Link href="/admin/comments">Comments</Link>
           <Link href="/admin/categories">Categories</Link>
           <Link href="/admin/authors">Authors</Link>
           <Link href="/admin/settings">Site Settings</Link>

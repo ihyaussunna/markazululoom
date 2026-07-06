@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import styles from './post.module.css';
+import PostReactions from '@/components/PostReactions';
+import PostComments from '@/components/PostComments';
 
 export default async function SinglePostPage(props) {
   const { slug } = await props.params;
@@ -96,6 +98,16 @@ export default async function SinglePostPage(props) {
           className={styles.content}
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
+        
+        {/* Reactions Section */}
+        <PostReactions 
+          postId={post.id} 
+          initialLikes={post.likes} 
+          initialDislikes={post.dislikes} 
+        />
+
+        {/* Comments Section */}
+        <PostComments postId={post.id} />
         
         {post.author.bio && (
           <div className={styles.authorBioCard}>
