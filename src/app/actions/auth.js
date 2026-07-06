@@ -3,8 +3,8 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-const ADMIN_USER = 'uMarkazululoomm';
-const ADMIN_PASS = 'passuMarkazululoomm';
+const ADMIN_USER = 'Globeatsadmin';
+const ADMIN_PASS = 'Globeatsadmin@in';
 
 export async function login(formData) {
   const username = formData.get('username');
