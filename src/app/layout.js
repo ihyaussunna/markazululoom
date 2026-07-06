@@ -1,6 +1,6 @@
 import "./globals.css";
 import { prisma } from '@/lib/prisma';
-import { fklDhikk, outfit } from '@/lib/fonts';
+import { fklDhikk, inter } from '@/lib/fonts';
 
 export const metadata = {
   title: "Globeats",
@@ -28,10 +28,10 @@ export default async function RootLayout({ children }) {
   const getFontFamily = (fontSetting) => {
     switch (fontSetting) {
       case 'fkl-dhikk': return 'var(--font-dhikk), sans-serif';
-      case 'outfit': return 'var(--font-outfit), sans-serif';
+      case 'inter': return 'var(--font-inter), sans-serif';
       case 'manjari': return "'Manjari', sans-serif";
       case 'anek-malayalam': return "'Anek Malayalam', sans-serif";
-      default: return "'Outfit', sans-serif";
+      default: return "'Inter', sans-serif";
     }
   };
 
@@ -43,7 +43,7 @@ export default async function RootLayout({ children }) {
   `;
 
   return (
-    <html lang="en" className={`${fklDhikk.variable} ${outfit.variable}`}>
+    <html lang="en" className={`${fklDhikk.variable} ${inter.variable}`}>
       <head>
         <style dangerouslySetInnerHTML={{ __html: cssVariables }} />
         <script

@@ -1,5 +1,5 @@
 import localFont from 'next/font/local';
-import { Outfit } from 'next/font/google';
+import { Inter } from 'next/font/google';
 
 export const fklDhikk = localFont({
   src: '../../public/fonts/FKL-Dhikk-Bold.ttf',
@@ -7,8 +7,8 @@ export const fklDhikk = localFont({
   display: 'swap',
 });
 
-export const outfit = Outfit({
+export const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-outfit',
+  variable: '--font-inter',
   display: 'swap',
 });

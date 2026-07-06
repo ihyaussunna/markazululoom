@@ -8,7 +8,7 @@ export default function Footer() {
         <div className={styles.footerGrid}>
           {/* Brand Column */}
           <div className={styles.footerBrand}>
-            <h2>Globeats</h2>
+            <img src="/footer-logo.png" alt="Globeats" className={styles.footerLogoImage} />
             <p>The ultimate destination for Malayalam blogs, essays, and literature.</p>
           </div>
           
