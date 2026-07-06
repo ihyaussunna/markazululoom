@@ -37,7 +37,7 @@ export default async function RootLayout({ children }) {
 
   const cssVariables = `
     :root {
-      --font-title-dynamic: ${getFontFamily(titleFont)};
+      --font-title-dynamic: var(--font-dhikk), sans-serif;
       --font-text-dynamic: ${getFontFamily(textFont)};
     }
   `;
