@@ -2,6 +2,7 @@ import { prisma } from '@/lib/prisma';
 import { createPost, deletePost, togglePostStatus } from '@/app/actions/post';
 import Link from 'next/link';
 import styles from '../admin.module.css';
+import SubmitButton from '@/components/SubmitButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -74,7 +75,7 @@ export default async function PostsPage() {
             </div>
 
             <div style={{ alignSelf: 'flex-start', marginTop: '1rem' }}>
-              <button type="submit" className={styles.primaryBtn}>Publish Post</button>
+              <SubmitButton className={styles.primaryBtn} loadingText="Publishing...">Publish Post</SubmitButton>
             </div>
           </form>
         </div>
@@ -101,16 +102,16 @@ export default async function PostsPage() {
                     <form action={togglePostStatus}>
                       <input type="hidden" name="id" value={post.id} />
                       <input type="hidden" name="published" value={post.published.toString()} />
-                      <button type="submit" style={{ padding: '0.4rem 0.8rem', borderRadius: '4px', backgroundColor: post.published ? '#10b981' : '#6b7280', color: 'white', fontSize: '0.8rem' }}>
+                      <SubmitButton loadingText="Updating..." style={{ padding: '0.4rem 0.8rem', borderRadius: '4px', backgroundColor: post.published ? '#10b981' : '#6b7280', color: 'white', fontSize: '0.8rem', border: 'none' }}>
                         {post.published ? 'Make Private' : 'Make Public'}
-                      </button>
+                      </SubmitButton>
                     </form>
                     <Link href={`/admin/posts/${post.id}/edit`} style={{ padding: '0.4rem 0.8rem', borderRadius: '4px', backgroundColor: 'var(--primary-color)', color: 'white', fontSize: '0.8rem', textDecoration: 'none' }}>
                       Edit
                     </Link>
                     <form action={deletePost}>
                       <input type="hidden" name="id" value={post.id} />
-                      <button type="submit" className={styles.deleteBtn}>Delete</button>
+                      <SubmitButton className={styles.deleteBtn} loadingText="Deleting...">Delete</SubmitButton>
                     </form>
                   </div>
                 </td>

@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { createAuthor, deleteAuthor } from '@/app/actions/author';
 import styles from '../admin.module.css';
+import SubmitButton from '@/components/SubmitButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -33,7 +34,7 @@ export default async function AuthorsPage() {
             <textarea id="bio" name="bio" rows="3" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)', resize: 'vertical' }}></textarea>
           </div>
           <div style={{ alignSelf: 'flex-start' }}>
-            <button type="submit" className={styles.primaryBtn}>Add Author</button>
+            <SubmitButton className={styles.primaryBtn} loadingText="Adding...">Add Author</SubmitButton>
           </div>
         </form>
       </div>
@@ -55,7 +56,7 @@ export default async function AuthorsPage() {
                 <div className={styles.actions}>
                   <form action={deleteAuthor}>
                     <input type="hidden" name="id" value={author.id} />
-                    <button type="submit" className={styles.deleteBtn}>Delete</button>
+                    <SubmitButton className={styles.deleteBtn} loadingText="Deleting...">Delete</SubmitButton>
                   </form>
                 </div>
               </td>

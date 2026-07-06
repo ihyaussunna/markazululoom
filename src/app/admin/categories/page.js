@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { createCategory, deleteCategory } from '@/app/actions/category';
 import styles from '../admin.module.css';
+import SubmitButton from '@/components/SubmitButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -26,7 +27,7 @@ export default async function CategoriesPage() {
             <label htmlFor="slug" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Slug (Optional)</label>
             <input type="text" id="slug" name="slug" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
           </div>
-          <button type="submit" className={styles.primaryBtn}>Add Category</button>
+          <SubmitButton className={styles.primaryBtn} loadingText="Adding...">Add Category</SubmitButton>
         </form>
       </div>
 
@@ -47,7 +48,7 @@ export default async function CategoriesPage() {
                 <div className={styles.actions}>
                   <form action={deleteCategory}>
                     <input type="hidden" name="id" value={cat.id} />
-                    <button type="submit" className={styles.deleteBtn}>Delete</button>
+                    <SubmitButton className={styles.deleteBtn} loadingText="Deleting...">Delete</SubmitButton>
                   </form>
                 </div>
               </td>
