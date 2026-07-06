@@ -97,6 +97,10 @@
     margin: 0 auto;
   }
 
+  .footerLogoImage {
+    margin: 0 auto 1rem auto;
+  }
+
   .socialIcons {
     justify-content: center;
   }
