@@ -1,6 +1,7 @@
 import "./globals.css";
 import { prisma } from '@/lib/prisma';
 import { fklDhikk, inter } from '@/lib/fonts';
+import AuthProvider from '@/components/AuthProvider';
 
 export const metadata = {
   title: "Globeats",
@@ -60,7 +61,11 @@ export default async function RootLayout({ children }) {
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </body>
     </html>
   );
 }

@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useSession, signIn } from 'next-auth/react';
 import styles from './PostComments.module.css';
 
 export default function PostComments({ postId }) {
+  const { data: session } = useSession();
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [authorName, setAuthorName] = useState('');
   const [content, setContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -30,20 +31,23 @@ export default function PostComments({ postId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!authorName.trim() || !content.trim()) return;
+    if (!session) {
+      signIn('google');
+      return;
+    }
+    if (!content.trim()) return;
     
     setIsSubmitting(true);
     try {
       const res = await fetch(`/api/posts/${postId}/comments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ authorName, content })
+        body: JSON.stringify({ content })
       });
 
       if (res.ok) {
         const data = await res.json();
         setComments([data.comment, ...comments]);
-        setAuthorName('');
         setContent('');
       }
     } catch (error) {
@@ -57,31 +61,30 @@ export default function PostComments({ postId }) {
     <div className={styles.commentsSection}>
       <h3 className={styles.title}>Comments ({comments.length})</h3>
 
-      <form onSubmit={handleSubmit} className={styles.commentForm}>
-        <div className={styles.inputGroup}>
-          <input 
-            type="text" 
-            placeholder="Your Name" 
-            value={authorName}
-            onChange={(e) => setAuthorName(e.target.value)}
-            required
-            className={styles.input}
-          />
+      {session ? (
+        <form onSubmit={handleSubmit} className={styles.commentForm}>
+          <div className={styles.inputGroup}>
+            <textarea 
+              placeholder="Write a comment..." 
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              required
+              rows="3"
+              className={styles.textarea}
+            />
+          </div>
+          <button type="submit" disabled={isSubmitting} className={styles.submitBtn}>
+            {isSubmitting ? 'Posting...' : 'Post Comment'}
+          </button>
+        </form>
+      ) : (
+        <div style={{ textAlign: 'center', padding: '2rem', backgroundColor: 'var(--surface-color)', borderRadius: '8px', marginBottom: '2rem', border: '1px solid var(--border-color)' }}>
+          <p style={{ marginBottom: '1rem', color: 'var(--text-secondary)' }}>You must be logged in to post a comment.</p>
+          <button onClick={() => signIn('google')} className={styles.submitBtn} style={{ margin: '0 auto' }}>
+            Sign in with Google
+          </button>
         </div>
-        <div className={styles.inputGroup}>
-          <textarea 
-            placeholder="Write a comment..." 
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-            rows="3"
-            className={styles.textarea}
-          />
-        </div>
-        <button type="submit" disabled={isSubmitting} className={styles.submitBtn}>
-          {isSubmitting ? 'Posting...' : 'Post Comment'}
-        </button>
-      </form>
+      )}
 
       {isLoading ? (
         <p className={styles.loading}>Loading comments...</p>
@@ -93,9 +96,13 @@ export default function PostComments({ postId }) {
             comments.map(comment => (
               <div key={comment.id} className={styles.commentItem}>
                 <div className={styles.commentHeader}>
-                  <div className={styles.avatar}>{comment.authorName.charAt(0).toUpperCase()}</div>
+                  {comment.user?.image ? (
+                    <img src={comment.user.image} alt={comment.user.name} className={styles.avatar} style={{ border: 'none', borderRadius: '50%' }} />
+                  ) : (
+                    <div className={styles.avatar}>{(comment.user?.name || 'U').charAt(0).toUpperCase()}</div>
+                  )}
                   <div className={styles.meta}>
-                    <strong>{comment.authorName}</strong>
+                    <strong>{comment.user?.name || 'Anonymous User'}</strong>
                     <span>{new Date(comment.createdAt).toLocaleDateString()}</span>
                   </div>
                 </div>

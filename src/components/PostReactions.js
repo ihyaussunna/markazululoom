@@ -2,17 +2,29 @@
 
 import { useState } from 'react';
 import { ThumbsUp, ThumbsDown } from 'lucide-react';
+import { useSession, signIn } from 'next-auth/react';
 import styles from './PostReactions.module.css';
 
 export default function PostReactions({ postId, initialLikes, initialDislikes }) {
+  const { data: session } = useSession();
   const [likes, setLikes] = useState(initialLikes);
   const [dislikes, setDislikes] = useState(initialDislikes);
   const [hasReacted, setHasReacted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleReact = async (action) => {
+    if (!session) {
+      signIn('google');
+      return;
+    }
+    
     if (hasReacted || isSubmitting) return;
     setIsSubmitting(true);
+
+    // Optimistic UI Update
+    setHasReacted(true);
+    if (action === 'like') setLikes(prev => prev + 1);
+    else setDislikes(prev => prev + 1);
 
     try {
       const res = await fetch(`/api/posts/${postId}/react`, {
@@ -21,14 +33,18 @@ export default function PostReactions({ postId, initialLikes, initialDislikes })
         body: JSON.stringify({ action })
       });
 
-      if (res.ok) {
-        const data = await res.json();
-        setLikes(data.likes);
-        setDislikes(data.dislikes);
-        setHasReacted(true);
+      if (!res.ok) {
+        // Rollback on error
+        setHasReacted(false);
+        if (action === 'like') setLikes(prev => prev - 1);
+        else setDislikes(prev => prev - 1);
       }
     } catch (error) {
       console.error('Failed to react:', error);
+      // Rollback on error
+      setHasReacted(false);
+      if (action === 'like') setLikes(prev => prev - 1);
+      else setDislikes(prev => prev - 1);
     } finally {
       setIsSubmitting(false);
     }
