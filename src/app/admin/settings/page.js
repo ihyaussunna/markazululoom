@@ -13,6 +13,7 @@ export default async function SettingsPage() {
 
   const currentTitleFont = settingsMap['titleFont'] || 'fkl-dhikk';
   const currentTextFont = settingsMap['textFont'] || 'anek-malayalam';
+  const currentUiFont = settingsMap['uiFont'] || 'inter';
 
   const banners = await prisma.banner.findMany({
     orderBy: { order: 'asc' }
@@ -28,15 +29,35 @@ export default async function SettingsPage() {
         <h3 style={{ marginBottom: '1rem' }}>Global Font Settings</h3>
         <form action={updateSiteSettings} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           
-          <div style={{ display: 'flex', gap: '1.5rem' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexGrow: 1 }}>
-              <label htmlFor="titleFont" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'bold' }}>Website Title & Heading Font</label>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <label htmlFor="titleFont" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'bold' }}>Blog Title Font</label>
               <select id="titleFont" name="titleFont" defaultValue={currentTitleFont} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }}>
                 <option value="fkl-dhikk">FKL-Dhikk Bold (Local Font)</option>
+                <option value="anek-malayalam">Anek Malayalam</option>
+                <option value="manjari">Manjari</option>
+                <option value="inter">Inter</option>
+                <option value="raleway">Raleway</option>
+                <option value="ubuntu">Ubuntu</option>
+                <option value="poppins">Poppins</option>
+                <option value="montserrat">Montserrat</option>
+                <option value="outfit">Outfit</option>
               </select>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexGrow: 1 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <label htmlFor="uiFont" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'bold' }}>Website Font</label>
+              <select id="uiFont" name="uiFont" defaultValue={currentUiFont} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }}>
+                <option value="inter">Inter</option>
+                <option value="raleway">Raleway</option>
+                <option value="ubuntu">Ubuntu</option>
+                <option value="poppins">Poppins</option>
+                <option value="montserrat">Montserrat</option>
+                <option value="outfit">Outfit</option>
+              </select>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="textFont" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'bold' }}>Post Content Text Font</label>
               <select id="textFont" name="textFont" defaultValue={currentTextFont} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }}>
                 <option value="anek-malayalam">Anek Malayalam</option>

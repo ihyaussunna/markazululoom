@@ -11,6 +11,7 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   let titleFont = 'fkl-dhikk';
   let textFont = 'anek-malayalam';
+  let uiFont = 'inter';
 
   try {
     const settings = await prisma.siteSetting.findMany();
@@ -21,6 +22,7 @@ export default async function RootLayout({ children }) {
     
     if (settingsMap['titleFont']) titleFont = settingsMap['titleFont'];
     if (settingsMap['textFont']) textFont = settingsMap['textFont'];
+    if (settingsMap['uiFont']) uiFont = settingsMap['uiFont'];
   } catch (e) {
     console.error("Failed to load site settings", e);
   }
@@ -45,6 +47,7 @@ export default async function RootLayout({ children }) {
     :root {
       --font-title-dynamic: ${getFontFamily(titleFont)};
       --font-text-dynamic: ${getFontFamily(textFont)};
+      --font-ui-dynamic: ${getFontFamily(uiFont)};
     }
   `;
 
