@@ -33,19 +33,20 @@ export default async function SettingsPage() {
               <label htmlFor="titleFont" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'bold' }}>Website Title & Heading Font</label>
               <select id="titleFont" name="titleFont" defaultValue={currentTitleFont} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }}>
                 <option value="fkl-dhikk">FKL-Dhikk Bold (Local Font)</option>
-                <option value="outfit">Outfit (Google Font)</option>
-                <option value="manjari">Manjari (Google Font)</option>
-                <option value="anek-malayalam">Anek Malayalam (Google Font)</option>
               </select>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexGrow: 1 }}>
               <label htmlFor="textFont" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'bold' }}>Post Content Text Font</label>
               <select id="textFont" name="textFont" defaultValue={currentTextFont} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }}>
-                <option value="anek-malayalam">Anek Malayalam (Google Font)</option>
-                <option value="manjari">Manjari (Google Font)</option>
-                <option value="outfit">Outfit (English only)</option>
-                <option value="fkl-dhikk">FKL-Dhikk Bold (Local Font)</option>
+                <option value="anek-malayalam">Anek Malayalam</option>
+                <option value="manjari">Manjari</option>
+                <option value="inter">Inter</option>
+                <option value="raleway">Raleway</option>
+                <option value="ubuntu">Ubuntu</option>
+                <option value="poppins">Poppins</option>
+                <option value="montserrat">Montserrat</option>
+                <option value="outfit">Outfit</option>
               </select>
             </div>
           </div>
