@@ -30,6 +30,7 @@ export default async function RootLayout({ children }) {
     switch (fontSetting) {
       case 'fkl-dhikk': return 'var(--font-dhikk), sans-serif';
       case 'inter': return 'var(--font-inter), sans-serif';
+      case 'outfit': return "'Outfit', sans-serif";
       case 'manjari': return "'Manjari', sans-serif";
       case 'anek-malayalam': return "'Anek Malayalam', sans-serif";
       default: return "'Inter', sans-serif";
@@ -38,7 +39,7 @@ export default async function RootLayout({ children }) {
 
   const cssVariables = `
     :root {
-      --font-title-dynamic: var(--font-dhikk), sans-serif;
+      --font-title-dynamic: ${getFontFamily(titleFont)};
       --font-text-dynamic: ${getFontFamily(textFont)};
     }
   `;
