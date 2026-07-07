@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useSession, signIn } from 'next-auth/react';
+import { Trash2 } from 'lucide-react';
 import styles from './PostComments.module.css';
 
 export default function PostComments({ postId }) {
@@ -57,6 +58,24 @@ export default function PostComments({ postId }) {
     }
   };
 
+  const handleDeleteComment = async (commentId) => {
+    if (!confirm('Are you sure you want to delete this comment?')) return;
+
+    try {
+      const res = await fetch(`/api/posts/${postId}/comments/${commentId}`, {
+        method: 'DELETE',
+      });
+
+      if (res.ok) {
+        setComments(comments.filter(c => c.id !== commentId));
+      } else {
+        console.error('Failed to delete comment');
+      }
+    } catch (error) {
+      console.error('Failed to delete comment:', error);
+    }
+  };
+
   return (
     <div className={styles.commentsSection}>
       <h3 className={styles.title}>Comments ({comments.length})</h3>
@@ -105,6 +124,15 @@ export default function PostComments({ postId }) {
                     <strong>{comment.user?.name || 'Anonymous User'}</strong>
                     <span>{new Date(comment.createdAt).toLocaleDateString()}</span>
                   </div>
+                  {session?.user?.id === comment.userId && (
+                    <button 
+                      onClick={() => handleDeleteComment(comment.id)}
+                      className={styles.deleteBtn}
+                      title="Delete your comment"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  )}
                 </div>
                 <p className={styles.commentContent}>{comment.content}</p>
               </div>

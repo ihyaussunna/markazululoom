@@ -121,3 +121,18 @@
   padding: 2rem 0;
   font-style: italic;
 }
+
+.deleteBtn {
+  margin-left: auto;
+  color: #ef4444;
+  background: none;
+  padding: 0.5rem;
+  border-radius: 6px;
+  opacity: 0.7;
+  transition: all 0.2s;
+}
+
+.deleteBtn:hover {
+  opacity: 1;
+  background-color: rgba(239, 68, 68, 0.1);
+}
