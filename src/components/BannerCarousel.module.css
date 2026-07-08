@@ -6,12 +6,12 @@
   overflow: hidden;
   border-radius: 12px;
   background-color: var(--surface-color);
-  aspect-ratio: 21 / 9;
+  aspect-ratio: 2 / 1;
 }
 
 @media (max-width: 768px) {
   .carouselContainer {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 2 / 1;
   }
 }
 
