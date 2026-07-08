@@ -77,7 +77,7 @@ export default async function SinglePostPage(props) {
                 <div className={styles.authorPlaceholder}>{post.author.name.charAt(0)}</div>
               )}
               <div className={styles.authorText}>
-                <span className={styles.authorName}>{post.author.name}</span>
+                <span className={styles.authorName} style={/[\u0D00-\u0D7F]/.test(post.author.name) ? { fontFamily: "'Anek Malayalam', sans-serif" } : {}}>{post.author.name}</span>
                 <p>{new Date(post.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
               </div>
             </div>
@@ -117,7 +117,7 @@ export default async function SinglePostPage(props) {
               ) : (
                 <div className={styles.authorPlaceholderLarge}>{post.author.name.charAt(0)}</div>
               )}
-              <h3>About {post.author.name}</h3>
+              <h3 style={/[\u0D00-\u0D7F]/.test(post.author.name) ? { fontFamily: "'Anek Malayalam', sans-serif" } : {}}>About {post.author.name}</h3>
             </div>
             <p className={styles.bioText}>{post.author.bio}</p>
           </div>

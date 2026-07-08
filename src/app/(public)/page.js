@@ -63,7 +63,7 @@ export default async function HomePage() {
                   <h1 className={styles.heroTitle}>{featuredPost.title}</h1>
                 </Link>
                 <div className={styles.heroMeta}>
-                  <span className={styles.authorName}>{featuredPost.author.name}</span>
+                  <span className={styles.authorName} style={/[\u0D00-\u0D7F]/.test(featuredPost.author.name) ? { fontFamily: "'Anek Malayalam', sans-serif" } : {}}>{featuredPost.author.name}</span>
                   <span>{new Date(featuredPost.createdAt).toLocaleDateString()}</span>
                 </div>
               </div>
@@ -89,7 +89,7 @@ export default async function HomePage() {
                       <h3 className={styles.sidebarTitle}>{post.title}</h3>
                     </Link>
                     <div className={styles.sidebarMeta}>
-                      <span className={styles.authorName}>{post.author.name}</span>
+                      <span className={styles.authorName} style={/[\u0D00-\u0D7F]/.test(post.author.name) ? { fontFamily: "'Anek Malayalam', sans-serif" } : {}}>{post.author.name}</span>
                     </div>
                   </div>
                 </article>
@@ -125,7 +125,7 @@ export default async function HomePage() {
                     <h3 className={styles.gridTitle}>{post.title}</h3>
                   </Link>
                   <div className={styles.gridMeta}>
-                    <span className={styles.authorName}>{post.author.name}</span>
+                    <span className={styles.authorName} style={/[\u0D00-\u0D7F]/.test(post.author.name) ? { fontFamily: "'Anek Malayalam', sans-serif" } : {}}>{post.author.name}</span>
                   </div>
                 </div>
               </article>

@@ -54,7 +54,7 @@ export default async function CategoryPage(props) {
                     {post.excerpt}
                   </p>
                   <div className={styles.authorMetaSmall}>
-                    {post.author.name} • {new Date(post.createdAt).toLocaleDateString()}
+                    <span style={/[\u0D00-\u0D7F]/.test(post.author.name) ? { fontFamily: "'Anek Malayalam', sans-serif" } : {}}>{post.author.name}</span> • {new Date(post.createdAt).toLocaleDateString()}
                   </div>
                 </div>
               </article>
