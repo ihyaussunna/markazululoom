@@ -8,9 +8,12 @@ export default function AdminLayout({ children }) {
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
           <Link href="/admin">
-            <h2>Globeats</h2>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <img src="/logo.png" alt="Globeats" style={{ height: '36px', width: 'auto' }} className={styles.logoLight} />
+              <img src="/logo-white.png" alt="Globeats" style={{ height: '36px', width: 'auto' }} className={styles.logoDark} />
+            </div>
           </Link>
-          <p>Admin Panel</p>
+          <p style={{ marginTop: '0.8rem', fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: '600' }}>Admin Panel</p>
         </div>
         <nav className={styles.nav}>
           <Link href="/admin">Dashboard</Link>

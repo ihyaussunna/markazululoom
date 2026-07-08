@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { updateSiteSettings, uploadBanner, deleteBanner, toggleBannerStatus } from '@/app/actions/settings';
 import styles from '../admin.module.css';
+import SubmitButton from '@/components/SubmitButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -73,7 +74,7 @@ export default async function SettingsPage() {
           </div>
 
           <div style={{ alignSelf: 'flex-start' }}>
-            <button type="submit" className={styles.primaryBtn}>Save Font Settings</button>
+            <SubmitButton className={styles.primaryBtn} successText="Saved!">Save Font Settings</SubmitButton>
           </div>
         </form>
       </div>
