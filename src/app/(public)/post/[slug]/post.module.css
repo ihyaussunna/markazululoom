@@ -17,6 +17,7 @@
 
 .categoryLabel {
   display: inline-block;
+  font-family: var(--font-ui-dynamic), sans-serif;
   font-size: 0.9rem;
   font-weight: 800;
   color: var(--logo-color); /* Matches Truecopy blue */

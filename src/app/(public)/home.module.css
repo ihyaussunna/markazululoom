@@ -11,7 +11,7 @@
 }
 
 .sectionTitle {
-  font-family: var(--font-title-dynamic), sans-serif;
+  font-family: var(--font-ui-dynamic), sans-serif;
   font-size: 1.8rem;
   font-weight: 800;
   color: var(--text-primary);
@@ -69,6 +69,7 @@
 .applePill {
   display: inline-block;
   align-self: flex-start;
+  font-family: var(--font-ui-dynamic), sans-serif;
   font-size: 0.8rem;
   font-weight: 700;
   color: var(--logo-color);
@@ -148,6 +149,7 @@
 }
 
 .applePillSmall {
+  font-family: var(--font-ui-dynamic), sans-serif;
   font-size: 0.7rem;
   font-weight: 700;
   color: var(--logo-color);
