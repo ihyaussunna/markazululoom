@@ -72,10 +72,12 @@
   text-align: left;
 }
 
-.authorText strong {
+.authorName {
   display: block;
   font-size: 1rem;
-  color: var(--text-primary);
+  font-weight: 500;
+  font-family: var(--font-ui-dynamic), sans-serif;
+  color: var(--text-secondary);
 }
 
 .authorText p {

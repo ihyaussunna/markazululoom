@@ -77,7 +77,7 @@ export default async function SinglePostPage(props) {
                 <div className={styles.authorPlaceholder}>{post.author.name.charAt(0)}</div>
               )}
               <div className={styles.authorText}>
-                <strong>{post.author.name}</strong>
+                <span className={styles.authorName}>{post.author.name}</span>
                 <p>{new Date(post.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
               </div>
             </div>

@@ -105,12 +105,13 @@
   gap: 0.5rem;
   align-items: center;
   font-size: 0.9rem;
-  font-family: var(--font-text-dynamic), sans-serif;
   color: var(--text-secondary);
 }
 
-.heroMeta strong {
-  color: var(--text-primary);
+.authorName {
+  font-family: var(--font-ui-dynamic), sans-serif;
+  font-weight: 500;
+  color: var(--text-secondary);
 }
 
 /* Sidebar Posts */
