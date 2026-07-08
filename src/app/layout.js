@@ -1,6 +1,6 @@
 import "./globals.css";
 import { prisma } from '@/lib/prisma';
-import { fklDhikk, inter, raleway, ubuntu, poppins, montserrat, outfit } from '@/lib/fonts';
+import { fklDhikk, inter, raleway, ubuntu, poppins, montserrat, outfit, geo } from '@/lib/fonts';
 import AuthProvider from '@/components/AuthProvider';
 
 export const metadata = {
@@ -52,7 +52,7 @@ export default async function RootLayout({ children }) {
   `;
 
   return (
-    <html lang="en" className={`${fklDhikk.variable} ${inter.variable} ${raleway.variable} ${ubuntu.variable} ${poppins.variable} ${montserrat.variable} ${outfit.variable}`}>
+    <html lang="en" className={`${fklDhikk.variable} ${inter.variable} ${raleway.variable} ${ubuntu.variable} ${poppins.variable} ${montserrat.variable} ${outfit.variable} ${geo.variable}`}>
       <head>
         <style dangerouslySetInnerHTML={{ __html: cssVariables }} />
         <script

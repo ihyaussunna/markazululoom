@@ -11,9 +11,9 @@
 }
 
 .sectionTitle {
-  font-family: var(--font-ui-dynamic), sans-serif;
+  font-family: var(--font-geo), sans-serif;
   font-size: 1.8rem;
-  font-weight: 800;
+  font-weight: 400;
   color: var(--text-primary);
   text-transform: uppercase;
   letter-spacing: 1px;
