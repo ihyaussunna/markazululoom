@@ -34,7 +34,7 @@
   font-weight: 800;
   line-height: 1.2;
   color: var(--logo-color); /* Set title to logo color as requested */
-  margin-bottom: 1rem;
+  margin-bottom: 0.3rem;
 }
 
 .meta {
