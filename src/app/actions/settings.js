@@ -13,6 +13,7 @@ export async function getSiteSettings() {
   // Defaults
   if (!settingsMap['titleFont']) settingsMap['titleFont'] = 'fkl-dhikk';
   if (!settingsMap['textFont']) settingsMap['textFont'] = 'anek-malayalam';
+  if (!settingsMap['uiFont']) settingsMap['uiFont'] = 'inter';
   
   return settingsMap;
 }
@@ -20,6 +21,7 @@ export async function getSiteSettings() {
 export async function updateSiteSettings(formData) {
   const titleFont = formData.get('titleFont');
   const textFont = formData.get('textFont');
+  const uiFont = formData.get('uiFont');
 
   if (titleFont) {
     await prisma.siteSetting.upsert({
@@ -34,6 +36,14 @@ export async function updateSiteSettings(formData) {
       where: { key: 'textFont' },
       update: { value: textFont },
       create: { key: 'textFont', value: textFont }
+    });
+  }
+
+  if (uiFont) {
+    await prisma.siteSetting.upsert({
+      where: { key: 'uiFont' },
+      update: { value: uiFont },
+      create: { key: 'uiFont', value: uiFont }
     });
   }
 
