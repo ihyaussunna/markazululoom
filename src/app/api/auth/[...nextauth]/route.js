@@ -14,6 +14,7 @@ export const authOptions = {
   session: {
     strategy: "jwt",
   },
+  secret: process.env.NEXTAUTH_SECRET || "globeats_default_super_secret_key_2026_xyz123",
   callbacks: {
     async session({ session, token }) {
       if (session?.user) {
