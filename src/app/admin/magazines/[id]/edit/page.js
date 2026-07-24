@@ -5,8 +5,9 @@ import SubmitButton from '@/components/SubmitButton';
 import styles from '../../../admin.module.css';
 
 export default async function EditMagazinePage({ params }) {
+  const resolvedParams = await params;
   const magazine = await prisma.magazine.findUnique({
-    where: { id: params.id }
+    where: { id: resolvedParams.id }
   });
 
   if (!magazine) {
@@ -39,42 +40,42 @@ export default async function EditMagazinePage({ params }) {
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="slug" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Slug</label>
-              <input type="text" id="slug" name="slug" defaultValue={magazine.slug} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <input type="text" id="slug" name="slug" defaultValue={magazine.slug || ''} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="edition" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Edition</label>
-              <input type="text" id="edition" name="edition" defaultValue={magazine.edition} placeholder="e.g. Vol 1. Issue 4" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <input type="text" id="edition" name="edition" defaultValue={magazine.edition || ''} placeholder="e.g. Vol 1. Issue 4" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="year" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Year</label>
-              <input type="number" id="year" name="year" defaultValue={magazine.year} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <input type="number" id="year" name="year" defaultValue={magazine.year || ''} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="language" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Language</label>
-              <input type="text" id="language" name="language" defaultValue={magazine.language} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <input type="text" id="language" name="language" defaultValue={magazine.language || ''} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="author" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Author / Editor</label>
-              <input type="text" id="author" name="author" defaultValue={magazine.author} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <input type="text" id="author" name="author" defaultValue={magazine.author || ''} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="publisher" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Publisher</label>
-              <input type="text" id="publisher" name="publisher" defaultValue={magazine.publisher} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <input type="text" id="publisher" name="publisher" defaultValue={magazine.publisher || ''} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             <label htmlFor="description" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Description</label>
-            <textarea id="description" name="description" defaultValue={magazine.description} rows="3" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)', resize: 'vertical' }}></textarea>
+            <textarea id="description" name="description" defaultValue={magazine.description || ''} rows="3" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)', resize: 'vertical' }}></textarea>
           </div>
 
           <hr style={{ borderColor: 'var(--border-color)', margin: '1rem 0' }} />
@@ -93,7 +94,7 @@ export default async function EditMagazinePage({ params }) {
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="pdfLink" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>PDF Link (Direct link to PDF file)</label>
-              <input type="url" id="pdfLink" name="pdfLink" defaultValue={magazine.pdfLink} placeholder="https://.../file.pdf" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <input type="url" id="pdfLink" name="pdfLink" defaultValue={magazine.pdfLink || ''} placeholder="https://.../file.pdf" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
           </div>
 
@@ -108,18 +109,18 @@ export default async function EditMagazinePage({ params }) {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="seoTitle" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>SEO Title</label>
-              <input type="text" id="seoTitle" name="seoTitle" defaultValue={magazine.seoTitle} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <input type="text" id="seoTitle" name="seoTitle" defaultValue={magazine.seoTitle || ''} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="tags" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Tags (Comma separated)</label>
-              <input type="text" id="tags" name="tags" defaultValue={magazine.tags} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <input type="text" id="tags" name="tags" defaultValue={magazine.tags || ''} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             <label htmlFor="seoDescription" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>SEO Description</label>
-            <textarea id="seoDescription" name="seoDescription" defaultValue={magazine.seoDescription} rows="2" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)', resize: 'vertical' }}></textarea>
+            <textarea id="seoDescription" name="seoDescription" defaultValue={magazine.seoDescription || ''} rows="2" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)', resize: 'vertical' }}></textarea>
           </div>
 
           <div style={{ display: 'flex', gap: '2rem', marginTop: '1rem', alignItems: 'center' }}>
