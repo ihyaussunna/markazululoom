@@ -12,18 +12,22 @@ import { saveReadingHistory } from '@/app/actions/magazines';
 // Configure PDF worker
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-const PageContainer = React.forwardRef(({ pageNumber, width, height, type, url }, ref) => {
+const PageContainer = React.forwardRef(({ pageNumber, width, height, type, url, isVisible = true }, ref) => {
   return (
     <div className={styles.page} ref={ref}>
       <div className={styles.pageContent}>
         {type === 'pdf' ? (
-          <Page 
-            pageNumber={pageNumber} 
-            scale={1.5}
-            renderTextLayer={false}
-            renderAnnotationLayer={false}
-            loading={<div className={styles.pageLoading}>Loading...</div>}
-          />
+          isVisible ? (
+            <Page 
+              pageNumber={pageNumber} 
+              scale={1.5}
+              renderTextLayer={false}
+              renderAnnotationLayer={false}
+              loading={<div className={styles.pageLoading}>Loading page...</div>}
+            />
+          ) : (
+            <div className={styles.pageLoading}></div>
+          )
         ) : (
           <img src={url} alt={`Page ${pageNumber}`} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         )}
@@ -203,15 +207,19 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
                 ref={bookRef}
                 className={styles.flipbook}
               >
-                {Array.from(new Array(numPages), (el, index) => (
-                  <PageContainer 
-                    key={`page_${index + 1}`} 
-                    pageNumber={index + 1} 
-                    type="pdf"
-                    width={dimensions.width}
-                    height={dimensions.height}
-                  />
-                ))}
+                {Array.from(new Array(numPages), (el, index) => {
+                  const isVisible = Math.abs(currentPage - index) <= 3;
+                  return (
+                    <PageContainer 
+                      key={`page_${index + 1}`} 
+                      pageNumber={index + 1} 
+                      type="pdf"
+                      width={dimensions.width}
+                      height={dimensions.height}
+                      isVisible={isVisible}
+                    />
+                  );
+                })}
               </HTMLFlipBook>
             )}
           </Document>
