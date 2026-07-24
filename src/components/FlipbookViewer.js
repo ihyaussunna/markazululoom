@@ -9,8 +9,11 @@ import { ZoomIn, ZoomOut, Maximize, X, ChevronLeft, ChevronRight, Menu, Share2, 
 import styles from './FlipbookViewer.module.css';
 import { saveReadingHistory } from '@/app/actions/magazines';
 
-// Configure PDF worker
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+// Configure PDF worker to use local Next.js Webpack integration instead of external CDN
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url,
+).toString();
 
 const PageContainer = React.forwardRef(({ pageNumber, width, height, type, url, isVisible = true }, ref) => {
   return (
