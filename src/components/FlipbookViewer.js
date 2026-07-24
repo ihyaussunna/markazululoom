@@ -19,9 +19,9 @@ const PageContainer = React.forwardRef(({ pageNumber, width, height, type, url }
         {type === 'pdf' ? (
           <Page 
             pageNumber={pageNumber} 
-            width={width}
-            renderTextLayer={true}
-            renderAnnotationLayer={true}
+            height={height}
+            renderTextLayer={false}
+            renderAnnotationLayer={false}
             loading={<div className={styles.pageLoading}>Loading...</div>}
           />
         ) : (
@@ -117,7 +117,7 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
     const updateDimensions = () => {
       const isMobile = window.innerWidth < 768;
       const height = window.innerHeight * 0.8;
-      const width = isMobile ? window.innerWidth * 0.9 : height * 0.75;
+      const width = isMobile ? window.innerWidth * 0.9 : height * 0.7071;
       setDimensions({ width, height });
     };
     
