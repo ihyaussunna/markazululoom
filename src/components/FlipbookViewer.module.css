@@ -153,6 +153,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.pageContent :global(.react-pdf__Page) {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.pageContent :global(.react-pdf__Page) canvas {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
 }
 
 /* Hard cover styling for first and last pages (managed by react-pageflip natively via CSS logic, but we can add styles if needed) */

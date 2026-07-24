@@ -19,7 +19,7 @@ const PageContainer = React.forwardRef(({ pageNumber, width, height, type, url }
         {type === 'pdf' ? (
           <Page 
             pageNumber={pageNumber} 
-            height={height}
+            scale={1.5}
             renderTextLayer={false}
             renderAnnotationLayer={false}
             loading={<div className={styles.pageLoading}>Loading...</div>}
