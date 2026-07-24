@@ -3,6 +3,8 @@ import { prisma } from '@/lib/prisma';
 import styles from './home.module.css';
 import BannerCarousel from '@/components/BannerCarousel';
 
+export const revalidate = 60; // Cache page for 60 seconds
+
 export default async function HomePage() {
   // Fetch latest 5 posts for the hero section
   const latestPosts = await prisma.post.findMany({

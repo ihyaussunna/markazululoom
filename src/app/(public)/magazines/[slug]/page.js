@@ -4,6 +4,9 @@ import FlipbookWrapper from '@/components/FlipbookWrapper';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
+export const revalidate = 60;
+
+
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const decodedSlug = decodeURIComponent(resolvedParams.slug);

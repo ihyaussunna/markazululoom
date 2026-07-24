@@ -2,6 +2,9 @@ import { prisma } from '@/lib/prisma';
 import styles from './magazines.module.css';
 import Link from 'next/link';
 
+export const revalidate = 60;
+
+
 export const metadata = {
   title: 'Digital Magazines | Globeats',
   description: 'Read the latest issues of our premium digital magazines with a realistic flipbook experience.',

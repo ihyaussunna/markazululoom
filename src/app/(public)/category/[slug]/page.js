@@ -2,6 +2,9 @@ import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import styles from '../../home.module.css';
 
+export const revalidate = 60;
+
+
 export default async function CategoryPage(props) {
   const { slug } = await props.params;
 

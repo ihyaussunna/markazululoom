@@ -4,6 +4,9 @@ import styles from './post.module.css';
 import PostReactions from '@/components/PostReactions';
 import PostComments from '@/components/PostComments';
 
+export const revalidate = 60;
+
+
 export default async function SinglePostPage(props) {
   const { slug } = await props.params;
 
