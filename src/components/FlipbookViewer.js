@@ -129,8 +129,22 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
   useEffect(() => {
     const updateDimensions = () => {
       const isMobile = window.innerWidth < 768;
-      const height = window.innerHeight * 0.8;
-      const width = isMobile ? window.innerWidth * 0.9 : height * (2550 / 3300);
+      const pdfRatio = 2550 / 3300;
+      
+      let width, height;
+      if (isMobile) {
+        width = window.innerWidth * 0.95;
+        height = width / pdfRatio;
+        
+        const maxHeight = window.innerHeight * 0.75;
+        if (height > maxHeight) {
+          height = maxHeight;
+          width = height * pdfRatio;
+        }
+      } else {
+        height = window.innerHeight * 0.8;
+        width = height * pdfRatio;
+      }
       setDimensions({ width, height });
     };
     
@@ -187,7 +201,7 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
       </div>
 
       {/* Flipbook Area */}
-      <div className={styles.flipbookWrapper} style={{ transform: `scale(${zoom})` }}>
+      <div className={styles.flipbookWrapper}>
         {isPdf ? (
           <Document
             file={`/api/proxy-pdf?url=${encodeURIComponent(magazine.pdfLink)}`}
@@ -198,16 +212,17 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
           >
             {numPages && (
               <HTMLFlipBook 
-                width={dimensions.width} 
-                height={dimensions.height}
+                width={dimensions.width * zoom} 
+                height={dimensions.height * zoom}
                 size="fixed"
                 minWidth={315}
-                maxWidth={1000}
+                maxWidth={2000}
                 minHeight={400}
-                maxHeight={1533}
+                maxHeight={3000}
                 maxShadowOpacity={0.5}
                 showCover={true}
                 mobileScrollSupport={true}
+                useMouseEvents={zoom === 1} /* Disable swipe when zoomed to allow native panning/scrolling */
                 onFlip={onFlip}
                 ref={bookRef}
                 className={styles.flipbook}
@@ -219,8 +234,8 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
                       key={`page_${index + 1}`} 
                       pageNumber={index + 1} 
                       type="pdf"
-                      width={dimensions.width}
-                      height={dimensions.height}
+                      width={dimensions.width * zoom}
+                      height={dimensions.height * zoom}
                       isVisible={isVisible}
                     />
                   );
@@ -231,16 +246,17 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
         ) : (
           numPages > 0 ? (
             <HTMLFlipBook 
-                width={dimensions.width} 
-                height={dimensions.height}
+                width={dimensions.width * zoom} 
+                height={dimensions.height * zoom}
                 size="fixed"
                 minWidth={315}
-                maxWidth={1000}
+                maxWidth={2000}
                 minHeight={400}
-                maxHeight={1533}
+                maxHeight={3000}
                 maxShadowOpacity={0.5}
                 showCover={true}
                 mobileScrollSupport={true}
+                useMouseEvents={zoom === 1}
                 onFlip={onFlip}
                 ref={bookRef}
                 className={styles.flipbook}
@@ -251,8 +267,8 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
                     pageNumber={index + 1} 
                     type="img"
                     url={url}
-                    width={dimensions.width}
-                    height={dimensions.height}
+                    width={dimensions.width * zoom}
+                    height={dimensions.height * zoom}
                   />
                 ))}
               </HTMLFlipBook>
