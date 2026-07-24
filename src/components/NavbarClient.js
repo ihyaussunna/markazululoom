@@ -1,12 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import ThemeToggle from './ThemeToggle';
 import styles from './Navbar.module.css';
 
 export default function NavbarClient({ categories }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Prevent scrolling when mobile menu is open
   useEffect(() => {
@@ -52,30 +58,34 @@ export default function NavbarClient({ categories }) {
         </div>
       </button>
 
-      {/* Mobile Menu Overlay */}
-      <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ''}`}>
-        <div className={styles.mobileMenuHeader}>
-          <h3>MENU</h3>
-          <button className={styles.closeMenuBtn} onClick={() => setMenuOpen(false)}>✕</button>
-        </div>
-        <div className={styles.mobileMenuLinks}>
-          <Link href="/" onClick={() => setMenuOpen(false)}>HOME</Link>
-          <Link href="/magazines" onClick={() => setMenuOpen(false)}>MAGAZINES</Link>
-          <div className={styles.mobileCategoriesHeading}>CATEGORIES</div>
-          {categories.map(cat => (
-            <Link key={cat.id} href={`/category/${cat.slug}`} onClick={() => setMenuOpen(false)}>
-              {cat.name.toUpperCase()}
-            </Link>
-          ))}
-        </div>
-        <div className={styles.mobileMenuFooter}>
-          <span>Theme</span>
-          <ThemeToggle />
-        </div>
-      </div>
-      
-      {/* Overlay backdrop */}
-      {menuOpen && <div className={styles.overlay} onClick={() => setMenuOpen(false)}></div>}
+      {/* Mobile Menu & Overlay rendered via Portal to avoid backdrop-filter issues */}
+      {mounted && typeof document !== 'undefined' && createPortal(
+        <>
+          <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ''}`}>
+            <div className={styles.mobileMenuHeader}>
+              <h3>MENU</h3>
+              <button className={styles.closeMenuBtn} onClick={() => setMenuOpen(false)}>✕</button>
+            </div>
+            <div className={styles.mobileMenuLinks}>
+              <Link href="/" onClick={() => setMenuOpen(false)}>HOME</Link>
+              <Link href="/magazines" onClick={() => setMenuOpen(false)}>MAGAZINES</Link>
+              <div className={styles.mobileCategoriesHeading}>CATEGORIES</div>
+              {categories.map(cat => (
+                <Link key={cat.id} href={`/category/${cat.slug}`} onClick={() => setMenuOpen(false)}>
+                  {cat.name.toUpperCase()}
+                </Link>
+              ))}
+            </div>
+            <div className={styles.mobileMenuFooter}>
+              <span>Theme</span>
+              <ThemeToggle />
+            </div>
+          </div>
+          
+          {menuOpen && <div className={styles.overlay} onClick={() => setMenuOpen(false)}></div>}
+        </>,
+        document.body
+      )}
     </>
   );
 }
