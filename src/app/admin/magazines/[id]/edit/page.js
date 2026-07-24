@@ -5,22 +5,21 @@ import SubmitButton from '@/components/SubmitButton';
 import styles from '../../../admin.module.css';
 
 export default async function EditMagazinePage({ params }) {
+  const resolvedParams = await params;
+  const magazine = await prisma.magazine.findUnique({
+    where: { id: resolvedParams.id }
+  });
+
+  if (!magazine) {
+    notFound();
+  }
+
+  let pageImagesText = '';
   try {
-    const resolvedParams = await params;
-    const magazine = await prisma.magazine.findUnique({
-      where: { id: resolvedParams.id }
-    });
-
-    if (!magazine) {
-      notFound();
+    if (magazine.pageImages) {
+      pageImagesText = JSON.parse(magazine.pageImages).join('\n');
     }
-
-    let pageImagesText = '';
-    try {
-      if (magazine.pageImages) {
-        pageImagesText = JSON.parse(magazine.pageImages).join('\n');
-      }
-    } catch (e) {}
+  } catch (e) {}
 
   return (
     <div>
@@ -150,13 +149,4 @@ export default async function EditMagazinePage({ params }) {
       </div>
     </div>
   );
-  } catch (error) {
-    return (
-      <div style={{ padding: '2rem', color: 'red', backgroundColor: '#ffebe9', margin: '2rem', borderRadius: '8px' }}>
-        <h2>DEBUG: SSR Error Caught (Edit Page)</h2>
-        <p><strong>Message:</strong> {error.message}</p>
-        <pre style={{ whiteSpace: 'pre-wrap', fontSize: '0.8rem', marginTop: '1rem' }}>{error.stack}</pre>
-      </div>
-    );
-  }
 }
