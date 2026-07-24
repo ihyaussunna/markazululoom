@@ -22,6 +22,7 @@ export default function NavbarClient({ categories }) {
       {/* Desktop Navigation */}
       <nav className={`${styles.navLinks} ${styles.desktopNav}`}>
         <Link href="/">HOME</Link>
+        <Link href="/magazines">MAGAZINES</Link>
         <div className={styles.dropdown}>
           <span className={styles.dropdownToggle}>CATEGORIES ▾</span>
           <div className={styles.dropdownMenu}>
@@ -59,6 +60,7 @@ export default function NavbarClient({ categories }) {
         </div>
         <div className={styles.mobileMenuLinks}>
           <Link href="/" onClick={() => setMenuOpen(false)}>HOME</Link>
+          <Link href="/magazines" onClick={() => setMenuOpen(false)}>MAGAZINES</Link>
           <div className={styles.mobileCategoriesHeading}>CATEGORIES</div>
           {categories.map(cat => (
             <Link key={cat.id} href={`/category/${cat.slug}`} onClick={() => setMenuOpen(false)}>

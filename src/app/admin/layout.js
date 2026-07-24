@@ -17,11 +17,12 @@ export default function AdminLayout({ children }) {
         </div>
         <nav className={styles.nav}>
           <Link href="/admin">Dashboard</Link>
-          <Link href="/admin/posts">Posts</Link>
-          <Link href="/admin/comments">Comments</Link>
-          <Link href="/admin/categories">Categories</Link>
-          <Link href="/admin/authors">Authors</Link>
-          <Link href="/admin/settings">Site Settings</Link>
+          <Link href="/admin/posts" className={styles.sidebarLink}>All Posts</Link>
+          <Link href="/admin/posts/new" className={styles.sidebarLink}>New Post</Link>
+          <Link href="/admin/categories" className={styles.sidebarLink}>Categories</Link>
+          <Link href="/admin/authors" className={styles.sidebarLink}>Authors</Link>
+          <Link href="/admin/magazines" className={styles.sidebarLink}>Magazines</Link>
+          <Link href="/admin/settings" className={styles.sidebarLink}>Settings</Link>
           <Link href="/" target="_blank">View Site</Link>
         </nav>
         <form action={logout} className={styles.logoutForm}>
