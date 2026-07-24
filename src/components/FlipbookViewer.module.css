@@ -127,6 +127,17 @@
   padding: 2rem;
 }
 
+.zoomedWrapper {
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  padding: 1rem !important; /* give more space for panning */
+}
+
+/* Force react-pageflip to allow touch panning when zoomed */
+.zoomedWrapper * {
+  touch-action: auto !important;
+}
+
 .pdfDocument {
   display: flex;
   justify-content: center;

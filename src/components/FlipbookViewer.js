@@ -230,7 +230,7 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
       </div>
 
       {/* Flipbook Area */}
-      <div className={styles.flipbookWrapper}>
+      <div className={`${styles.flipbookWrapper} ${zoom > 1 ? styles.zoomedWrapper : ''}`}>
         {isPdf ? (
           <Document
             file={`/api/proxy-pdf?url=${encodeURIComponent(magazine.pdfLink)}`}
@@ -262,6 +262,7 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
                 mobileScrollSupport={true}
                 usePortrait={dimensions.isMobile}
                 useMouseEvents={zoom === 1} /* Disable swipe when zoomed to allow native panning/scrolling */
+                swipeDistance={zoom === 1 ? 30 : 99999}
                 onFlip={onFlip}
                 ref={bookRef}
                 className={styles.flipbook}
@@ -297,6 +298,7 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
                 mobileScrollSupport={true}
                 usePortrait={dimensions.isMobile}
                 useMouseEvents={zoom === 1}
+                swipeDistance={zoom === 1 ? 30 : 99999}
                 onFlip={onFlip}
                 ref={bookRef}
                 className={styles.flipbook}
