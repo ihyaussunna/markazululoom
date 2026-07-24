@@ -30,8 +30,6 @@ export default function NotFound() {
           fontWeight: '600',
           transition: 'opacity 0.2s'
         }}
-        onMouseOver={(e) => e.target.style.opacity = '0.9'}
-        onMouseOut={(e) => e.target.style.opacity = '1'}
       >
         Return Home
       </Link>
