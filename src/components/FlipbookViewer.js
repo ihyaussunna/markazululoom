@@ -177,7 +177,7 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
       <div className={styles.flipbookWrapper} style={{ transform: `scale(${zoom})` }}>
         {isPdf ? (
           <Document
-            file={magazine.pdfLink}
+            file={`/api/proxy-pdf?url=${encodeURIComponent(magazine.pdfLink)}`}
             onLoadSuccess={onDocumentLoadSuccess}
             loading={<div className={styles.loadingState}>Loading Document...</div>}
             className={styles.pdfDocument}
