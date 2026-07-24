@@ -105,8 +105,42 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
     return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
   }, []);
 
+  const playFlipSound = () => {
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) return;
+      const ctx = new AudioContext();
+      
+      const bufferSize = ctx.sampleRate * 0.15; // 150ms
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = Math.random() * 2 - 1; // White noise
+      }
+      
+      const noiseSource = ctx.createBufferSource();
+      noiseSource.buffer = buffer;
+      
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.value = 1200; // Paper rustle frequency
+      filter.Q.value = 0.5;
+      
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.5, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+      
+      noiseSource.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      
+      noiseSource.start();
+    } catch (e) {}
+  };
+
   const onFlip = (e) => {
     setCurrentPage(e.data);
+    playFlipSound();
     if (userId) {
       saveReadingHistory(userId, magazine.id, e.data);
     }
@@ -131,7 +165,7 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
   };
 
   // Dimensions based on screen size (rough estimation for responsive initial render)
-  const [dimensions, setDimensions] = useState({ width: 400, height: 600 });
+  const [dimensions, setDimensions] = useState({ width: 400, height: 600, isMobile: true });
   
   useEffect(() => {
     const updateDimensions = () => {
@@ -152,7 +186,7 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
         height = window.innerHeight * 0.8;
         width = height * pdfRatio;
       }
-      setDimensions({ width, height });
+      setDimensions({ width, height, isMobile });
     };
     
     updateDimensions();
@@ -238,6 +272,7 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
                 maxShadowOpacity={0.5}
                 showCover={true}
                 mobileScrollSupport={true}
+                usePortrait={dimensions.isMobile}
                 useMouseEvents={zoom === 1} /* Disable swipe when zoomed to allow native panning/scrolling */
                 onFlip={onFlip}
                 ref={bookRef}
@@ -272,6 +307,7 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
                 maxShadowOpacity={0.5}
                 showCover={true}
                 mobileScrollSupport={true}
+                usePortrait={dimensions.isMobile}
                 useMouseEvents={zoom === 1}
                 onFlip={onFlip}
                 ref={bookRef}
