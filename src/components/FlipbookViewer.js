@@ -57,7 +57,7 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
   
   const bookRef = useRef();
   const containerRef = useRef();
-
+  const audioRef = useRef();
   // Parse page images if not using PDF
   let images = [];
   try {
@@ -105,13 +105,25 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
     return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
   }, []);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      audioRef.current = new Audio('/page-flip.mp3');
+      audioRef.current.volume = 0.5;
+      audioRef.current.playbackRate = 1.5;
+      audioRef.current.preload = 'auto'; // Force browser to preload audio
+    }
+  }, []);
+
   const playFlipSound = () => {
-    try {
-      const audio = new Audio('/page-flip.mp3');
-      audio.volume = 0.5;
-      audio.playbackRate = 1.5; // Speed up the sound effect (1.5x faster)
-      audio.play().catch(e => console.log('Audio play failed:', e));
-    } catch (e) {}
+    if (audioRef.current) {
+      try {
+        audioRef.current.currentTime = 0; // Reset to start for instant replay
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(e => console.log('Audio play failed:', e));
+        }
+      } catch (e) {}
+    }
   };
 
   const onFlip = (e) => {
