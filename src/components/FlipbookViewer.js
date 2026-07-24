@@ -231,6 +231,11 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
 
       {/* Flipbook Area */}
       <div className={`${styles.flipbookWrapper} ${zoom > 1 ? styles.zoomedWrapper : ''}`}>
+        <div style={{ width: dimensions.isMobile ? (dimensions.width * zoom) : (dimensions.width * 2 * zoom), height: dimensions.height * zoom, position: 'relative' }}>
+          {zoom > 1 && (
+            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50, touchAction: 'auto' }} />
+          )}
+          <div style={{ transform: `scale(${zoom})`, transformOrigin: 'top left', width: dimensions.isMobile ? dimensions.width : (dimensions.width * 2), height: dimensions.height, position: 'relative' }}>
         {isPdf ? (
           <Document
             file={`/api/proxy-pdf?url=${encodeURIComponent(magazine.pdfLink)}`}
@@ -250,8 +255,8 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
           >
             {numPages && (
               <HTMLFlipBook 
-                width={dimensions.width * zoom} 
-                height={dimensions.height * zoom}
+                width={dimensions.width} 
+                height={dimensions.height}
                 size="fixed"
                 minWidth={315}
                 maxWidth={2000}
@@ -274,8 +279,8 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
                       key={`page_${index + 1}`} 
                       pageNumber={index + 1} 
                       type="pdf"
-                      width={dimensions.width * zoom}
-                      height={dimensions.height * zoom}
+                      width={dimensions.width}
+                      height={dimensions.height}
                       isVisible={isVisible}
                     />
                   );
@@ -286,8 +291,8 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
         ) : (
           numPages > 0 ? (
             <HTMLFlipBook 
-                width={dimensions.width * zoom} 
-                height={dimensions.height * zoom}
+                width={dimensions.width} 
+                height={dimensions.height}
                 size="fixed"
                 minWidth={315}
                 maxWidth={2000}
@@ -309,8 +314,8 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
                     pageNumber={index + 1} 
                     type="img"
                     url={url}
-                    width={dimensions.width * zoom}
-                    height={dimensions.height * zoom}
+                    width={dimensions.width}
+                    height={dimensions.height}
                   />
                 ))}
               </HTMLFlipBook>
@@ -318,6 +323,8 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
             <div className={styles.errorState}>No pages found for this magazine.</div>
           )
         )}
+          </div>
+        </div>
       </div>
       
       {/* Bottom Navigation */}
