@@ -1,7 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
-import dynamic from 'next/dynamic';
-const FlipbookViewer = dynamic(() => import('@/components/FlipbookViewer'), { ssr: false });
+import FlipbookWrapper from '@/components/FlipbookWrapper';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
@@ -46,7 +45,7 @@ export default async function MagazineReaderPage({ params }) {
   // We can pass userId to allow saving progress.
 
   return (
-    <FlipbookViewer 
+    <FlipbookWrapper 
       magazine={magazine} 
       userId={session?.user?.id} 
       initialPage={startPage} 
