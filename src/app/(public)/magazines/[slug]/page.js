@@ -46,9 +46,16 @@ export default async function MagazineReaderPage({ params }) {
   // We pass the startPage to the viewer if needed, though for now the viewer starts at 0.
   // We can pass userId to allow saving progress.
 
+  // Next.js Server Components cannot pass Date objects to Client Components
+  const safeMagazine = {
+    ...magazine,
+    createdAt: magazine.createdAt?.toISOString() || null,
+    updatedAt: magazine.updatedAt?.toISOString() || null
+  };
+
   return (
     <FlipbookWrapper 
-      magazine={magazine} 
+      magazine={safeMagazine} 
       userId={session?.user?.id} 
       initialPage={startPage} 
     />
