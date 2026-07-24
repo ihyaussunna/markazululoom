@@ -15,7 +15,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 const PageContainer = React.forwardRef(({ pageNumber, width, height, type, url }, ref) => {
   return (
     <div className={styles.page} ref={ref}>
-      <div className={styles.pageContent} style={{ width, height }}>
+      <div className={styles.pageContent}>
         {type === 'pdf' ? (
           <Page 
             pageNumber={pageNumber} 
@@ -186,7 +186,7 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
               <HTMLFlipBook 
                 width={dimensions.width} 
                 height={dimensions.height}
-                size="stretch"
+                size="fixed"
                 minWidth={315}
                 maxWidth={1000}
                 minHeight={400}
@@ -215,7 +215,7 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
             <HTMLFlipBook 
                 width={dimensions.width} 
                 height={dimensions.height}
-                size="stretch"
+                size="fixed"
                 minWidth={315}
                 maxWidth={1000}
                 minHeight={400}
