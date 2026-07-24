@@ -128,6 +128,8 @@
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
   font-weight: 800;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .edition {
@@ -297,7 +299,10 @@
 
 @media (max-width: 768px) {
   .title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
+  }
+  .featuredInfo h2 {
+    font-size: 1.8rem;
   }
   .searchForm {
     flex-direction: column;
