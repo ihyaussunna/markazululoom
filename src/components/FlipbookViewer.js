@@ -109,6 +109,7 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
     try {
       const audio = new Audio('/page-flip.mp3');
       audio.volume = 0.5;
+      audio.playbackRate = 1.5; // Speed up the sound effect (1.5x faster)
       audio.play().catch(e => console.log('Audio play failed:', e));
     } catch (e) {}
   };
