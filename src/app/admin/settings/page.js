@@ -91,7 +91,7 @@ export default async function SettingsPage() {
             <label htmlFor="link" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Banner Link URL (Optional)</label>
             <input type="url" id="link" name="link" placeholder="https://..." style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
           </div>
-          <button type="submit" className={styles.primaryBtn}>Upload Banner</button>
+          <SubmitButton className={styles.primaryBtn} loadingText="Uploading..." successText="Uploaded!">Upload Banner</SubmitButton>
         </form>
 
         <table className={styles.table}>
