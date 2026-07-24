@@ -178,6 +178,11 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
         {isPdf ? (
           <Document
             file={`/api/proxy-pdf?url=${encodeURIComponent(magazine.pdfLink)}`}
+            options={{
+              cMapUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/cmaps/`,
+              cMapPacked: true,
+              standardFontDataUrl: `https://unpkg.com/pdfjs-dist@${pdfjs.version}/standard_fonts/`,
+            }}
             onLoadSuccess={onDocumentLoadSuccess}
             loading={<div className={styles.loadingState}>Loading Document...</div>}
             className={styles.pdfDocument}
