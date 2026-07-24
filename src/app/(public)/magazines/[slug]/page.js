@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
-import FlipbookViewer from '@/components/FlipbookViewer';
+import dynamic from 'next/dynamic';
+const FlipbookViewer = dynamic(() => import('@/components/FlipbookViewer'), { ssr: false });
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
