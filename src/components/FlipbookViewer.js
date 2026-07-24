@@ -117,7 +117,7 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
     const updateDimensions = () => {
       const isMobile = window.innerWidth < 768;
       const height = window.innerHeight * 0.8;
-      const width = isMobile ? window.innerWidth * 0.9 : height * 0.7071;
+      const width = isMobile ? window.innerWidth * 0.9 : height * (2550 / 3300);
       setDimensions({ width, height });
     };
     
