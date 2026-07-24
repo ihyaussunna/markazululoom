@@ -50,7 +50,8 @@ export default async function MagazineReaderPage({ params }) {
   const safeMagazine = {
     ...magazine,
     createdAt: magazine.createdAt?.toISOString() || null,
-    updatedAt: magazine.updatedAt?.toISOString() || null
+    updatedAt: magazine.updatedAt?.toISOString() || null,
+    publishedAt: magazine.publishedAt?.toISOString() || null
   };
 
   return (

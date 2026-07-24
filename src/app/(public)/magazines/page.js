@@ -10,10 +10,11 @@ export const metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function MagazinesPage({ searchParams }) {
+  const resolvedParams = await searchParams;
   // Simple search and filter implementation
-  const search = searchParams?.q || '';
-  const yearFilter = searchParams?.year || '';
-  const sort = searchParams?.sort || 'desc';
+  const search = resolvedParams?.q || '';
+  const yearFilter = resolvedParams?.year || '';
+  const sort = resolvedParams?.sort || 'desc';
 
   const where = {
     isActive: true,
