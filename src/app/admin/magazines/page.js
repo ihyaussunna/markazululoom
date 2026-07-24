@@ -1,8 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
-import { uploadMagazine, deleteMagazine, toggleMagazineStatus } from '@/app/actions/magazines';
+import { deleteMagazine, toggleMagazineStatus } from '@/app/actions/magazines';
 import styles from '../../admin.module.css';
-import SubmitButton from '@/components/SubmitButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -14,40 +13,29 @@ export default async function AdminMagazinesPage() {
   return (
     <div>
       <div className={styles.header}>
-        <h1>Magazines</h1>
+        <h1>Magazines Dashboard</h1>
+        <Link href="/admin/magazines/new" className={styles.primaryBtn}>
+          Create Magazine
+        </Link>
       </div>
 
-      <div style={{ marginBottom: '2rem', padding: '1.5rem', backgroundColor: 'var(--surface-color)', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
-        <h3 style={{ marginBottom: '1rem' }}>Upload New Magazine</h3>
-        <form action={uploadMagazine} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexGrow: 1 }}>
-              <label htmlFor="title" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Title</label>
-              <input type="text" id="title" name="title" required style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexGrow: 1 }}>
-              <label htmlFor="image" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Thumbnail Image (Upload)</label>
-              <input type="file" id="image" name="image" accept="image/*" required style={{ padding: '0.7rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexGrow: 1 }}>
-              <label htmlFor="pdfLink" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>PDF Link (Google Drive / external)</label>
-              <input type="url" id="pdfLink" name="pdfLink" required placeholder="https://drive.google.com/..." style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <label htmlFor="description" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Description (Optional)</label>
-            <textarea id="description" name="description" rows="2" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)', resize: 'vertical' }}></textarea>
-          </div>
-
-          <div style={{ alignSelf: 'flex-start', marginTop: '1rem' }}>
-            <SubmitButton className={styles.primaryBtn} loadingText="Uploading...">Upload Magazine</SubmitButton>
-          </div>
-        </form>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem', marginBottom: '2rem' }}>
+        <div style={{ padding: '1.5rem', backgroundColor: 'var(--surface-color)', borderRadius: '8px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column' }}>
+          <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Total Magazines</span>
+          <span style={{ fontSize: '2rem', fontWeight: 'bold' }}>{magazines.length}</span>
+        </div>
+        <div style={{ padding: '1.5rem', backgroundColor: 'var(--surface-color)', borderRadius: '8px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column' }}>
+          <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Published</span>
+          <span style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--primary-color)' }}>{magazines.filter(m => m.status === 'PUBLISHED').length}</span>
+        </div>
+        <div style={{ padding: '1.5rem', backgroundColor: 'var(--surface-color)', borderRadius: '8px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column' }}>
+          <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Drafts</span>
+          <span style={{ fontSize: '2rem', fontWeight: 'bold', color: '#f59e0b' }}>{magazines.filter(m => m.status === 'DRAFT').length}</span>
+        </div>
+        <div style={{ padding: '1.5rem', backgroundColor: 'var(--surface-color)', borderRadius: '8px', border: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column' }}>
+          <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Archived</span>
+          <span style={{ fontSize: '2rem', fontWeight: 'bold', color: '#6b7280' }}>{magazines.filter(m => m.status === 'ARCHIVED').length}</span>
+        </div>
       </div>
 
       <div style={{ padding: '1.5rem', backgroundColor: 'var(--surface-color)', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
@@ -55,8 +43,7 @@ export default async function AdminMagazinesPage() {
           <thead>
             <tr>
               <th>Cover</th>
-              <th>Title</th>
-              <th>PDF Link</th>
+              <th>Magazine Details</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -65,34 +52,44 @@ export default async function AdminMagazinesPage() {
             {magazines.map((mag) => (
               <tr key={mag.id}>
                 <td>
-                  <img src={mag.coverImage} alt={mag.title} style={{ width: '60px', height: '80px', objectFit: 'cover', borderRadius: '4px' }} />
+                  <img src={mag.coverImage || '/placeholder-cover.jpg'} alt={mag.title} style={{ width: '60px', height: '80px', objectFit: 'cover', borderRadius: '4px', border: '1px solid var(--border-color)' }} />
                 </td>
-                <td style={{ fontWeight: '600' }}>{mag.title}</td>
                 <td>
-                  {mag.pdfLink ? (
-                    <a href={mag.pdfLink} target="_blank" rel="noreferrer" style={{ color: 'var(--primary-color)', textDecoration: 'underline' }}>View PDF</a>
-                  ) : 'No Link'}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                    <span style={{ fontWeight: '600', fontSize: '1.1rem' }}>{mag.title}</span>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                      {mag.edition && `${mag.edition} • `}{mag.year} {mag.isFeatured && <span style={{ padding: '2px 6px', backgroundColor: 'var(--primary-color)', color: 'white', borderRadius: '4px', fontSize: '0.7rem', marginLeft: '0.5rem' }}>Featured</span>}
+                    </span>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--primary-color)' }}>
+                      /{mag.slug}
+                    </span>
+                  </div>
                 </td>
                 <td>
                   <form action={toggleMagazineStatus}>
                     <input type="hidden" name="id" value={mag.id} />
-                    <input type="hidden" name="isActive" value={mag.isActive.toString()} />
-                    <button type="submit" style={{ padding: '0.4rem 0.8rem', borderRadius: '4px', backgroundColor: mag.isActive ? 'var(--primary-color)' : 'var(--border-color)', color: mag.isActive ? 'white' : 'var(--text-secondary)', fontSize: '0.8rem' }}>
-                      {mag.isActive ? 'Active' : 'Hidden'}
+                    <input type="hidden" name="isActive" value={(mag.status === 'PUBLISHED').toString()} />
+                    <button type="submit" style={{ padding: '0.4rem 0.8rem', borderRadius: '4px', backgroundColor: mag.status === 'PUBLISHED' ? 'var(--primary-color)' : mag.status === 'ARCHIVED' ? '#6b7280' : '#f59e0b', color: 'white', fontSize: '0.8rem', fontWeight: 'bold' }}>
+                      {mag.status}
                     </button>
                   </form>
                 </td>
                 <td>
-                  <form action={deleteMagazine}>
-                    <input type="hidden" name="id" value={mag.id} />
-                    <button type="submit" className={styles.deleteBtn}>Delete</button>
-                  </form>
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <Link href={`/admin/magazines/${mag.id}/edit`} style={{ padding: '0.4rem 0.8rem', borderRadius: '4px', backgroundColor: 'var(--bg-color)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', fontSize: '0.8rem', textDecoration: 'none' }}>
+                      Edit
+                    </Link>
+                    <form action={deleteMagazine}>
+                      <input type="hidden" name="id" value={mag.id} />
+                      <button type="submit" className={styles.deleteBtn}>Delete</button>
+                    </form>
+                  </div>
                 </td>
               </tr>
             ))}
             {magazines.length === 0 && (
               <tr>
-                <td colSpan="5" style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>No magazines uploaded yet.</td>
+                <td colSpan="4" style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>No magazines found. Create one!</td>
               </tr>
             )}
           </tbody>

@@ -108,8 +108,10 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  comments      Comment[]
-  reactions     Reaction[]
+  comments          Comment[]
+  reactions         Reaction[]
+  magazineBookmarks MagazineBookmark[]
+  magazineHistory   MagazineHistory[]
 }
 
 model VerificationToken {
@@ -137,14 +139,53 @@ model Banner {
 }
 
 model Magazine {
-  id          String   @id @default(cuid())
-  title       String
-  description String?  @db.Text
-  coverImage  String
-  pdfLink     String?
-  publishedAt DateTime @default(now())
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id             String   @id @default(cuid())
+  title          String
+  slug           String   @unique @default(cuid())
+  description    String?  @db.Text
+  coverImage     String
+  pdfLink        String?
+  pageImages     String?  @db.LongText
+  edition        String?
+  year           Int?
+  author         String?
+  publisher      String?
+  language       String   @default("Malayalam")
+  seoTitle       String?
+  seoDescription String?  @db.Text
+  tags           String?
+  status         String   @default("PUBLISHED")
+  isFeatured     Boolean  @default(false)
+  
+  bookmarks      MagazineBookmark[]
+  history        MagazineHistory[]
+
+  publishedAt    DateTime @default(now())
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
+model MagazineBookmark {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  magazineId String
+  magazine   Magazine @relation(fields: [magazineId], references: [id], onDelete: Cascade)
+  pageNumber Int
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, magazineId, pageNumber])
+}
+
+model MagazineHistory {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  magazineId String
+  magazine   Magazine @relation(fields: [magazineId], references: [id], onDelete: Cascade)
+  lastPage   Int      @default(1)
+  updatedAt  DateTime @updatedAt
+
+  @@unique([userId, magazineId])
+}

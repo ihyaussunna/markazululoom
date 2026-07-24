@@ -6,12 +6,12 @@
 
 .header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
 .title {
   font-family: var(--font-title-dynamic), 'Inter', sans-serif;
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: 800;
   margin-bottom: 1rem;
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -20,53 +20,182 @@
 }
 
 .subtitle {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: var(--text-secondary);
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
-/* Horizontal Scrolling Carousel */
-.carousel {
+.filtersBar {
+  margin-bottom: 4rem;
   display: flex;
-  gap: 2rem;
-  overflow-x: auto;
-  padding: 2rem 1rem;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  /* Hide scrollbar for a cleaner look */
-  scrollbar-width: none; 
+  justify-content: center;
 }
 
-.carousel::-webkit-scrollbar {
-  display: none;
+.searchForm {
+  display: flex;
+  gap: 1rem;
+  background: var(--surface-color);
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 800px;
+}
+
+.searchInput {
+  flex-grow: 1;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color);
+  color: var(--text-primary);
+  min-width: 200px;
+}
+
+.selectInput {
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color);
+  color: var(--text-primary);
+}
+
+.searchBtn {
+  padding: 0.8rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.searchBtn:hover {
+  background-color: var(--secondary-color);
+}
+
+.featuredSection {
+  display: flex;
+  gap: 3rem;
+  background: var(--surface-color);
+  border-radius: 16px;
+  padding: 3rem;
+  margin-bottom: 4rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  align-items: center;
+}
+
+.featuredCover {
+  flex: 0 0 350px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  transform: perspective(1000px) rotateY(15deg);
+  transition: transform 0.5s ease;
+}
+
+.featuredCover:hover {
+  transform: perspective(1000px) rotateY(0deg) scale(1.02);
+}
+
+.featuredCover img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.featuredInfo {
+  flex-grow: 1;
+}
+
+.featuredBadge {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background-color: rgba(var(--primary-rgb), 0.1);
+  color: var(--primary-color);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.featuredInfo h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 800;
+}
+
+.edition {
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.featuredInfo p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.metaData {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.readNowBtn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+}
+
+.readNowBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.4);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2.5rem;
 }
 
 .magazineCard {
-  flex: 0 0 auto;
-  width: 280px;
-  scroll-snap-align: center;
   background: var(--surface-color);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: var(--shadow-md);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  display: flex;
-  flex-direction: column;
   text-decoration: none;
   border: 1px solid var(--border-color);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
 }
 
 .magazineCard:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px);
   box-shadow: var(--shadow-lg);
 }
 
 .coverContainer {
-  width: 100%;
-  height: 380px;
   position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
   overflow: hidden;
   background-color: var(--bg-color);
 }
@@ -82,6 +211,35 @@
   transform: scale(1.05);
 }
 
+.readOverlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.magazineCard:hover .readOverlay {
+  opacity: 1;
+}
+
+.readOverlay span {
+  padding: 0.8rem 1.5rem;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 50px;
+  font-weight: bold;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.magazineCard:hover .readOverlay span {
+  transform: translateY(0);
+}
+
 .info {
   padding: 1.5rem;
   display: flex;
@@ -89,17 +247,19 @@
   flex-grow: 1;
 }
 
+.metaTop {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
 .magazineTitle {
   font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
   color: var(--text-primary);
-}
-
-.date {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 
 .description {
@@ -110,24 +270,6 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-bottom: 1.5rem;
-}
-
-.readBtn {
-  margin-top: auto;
-  display: inline-block;
-  text-align: center;
-  padding: 0.8rem 1.5rem;
-  background-color: var(--primary-color);
-  color: white;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: background-color 0.2s;
-}
-
-.readBtn:hover {
-  background-color: var(--secondary-color);
 }
 
 .emptyState {
@@ -140,14 +282,24 @@
   border: 1px dashed var(--border-color);
 }
 
+@media (max-width: 900px) {
+  .featuredSection {
+    flex-direction: column;
+    padding: 2rem;
+    gap: 2rem;
+  }
+  .featuredCover {
+    flex: none;
+    width: 100%;
+    max-width: 350px;
+  }
+}
+
 @media (max-width: 768px) {
   .title {
     font-size: 2.5rem;
   }
-  .magazineCard {
-    width: 240px;
-  }
-  .coverContainer {
-    height: 320px;
+  .searchForm {
+    flex-direction: column;
   }
 }
