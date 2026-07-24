@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import { deleteMagazine, toggleMagazineStatus } from '@/app/actions/magazines';
-import styles from '../../admin.module.css';
+import styles from '../admin.module.css';
 
 export const dynamic = 'force-dynamic';
 

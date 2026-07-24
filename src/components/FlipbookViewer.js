@@ -3,8 +3,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import { Document, Page, pdfjs } from 'react-pdf';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import 'react-pdf/dist/esm/Page/TextLayer.css';
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
 import { ZoomIn, ZoomOut, Maximize, X, ChevronLeft, ChevronRight, Menu, Share2, Download, Bookmark } from 'lucide-react';
 import styles from './FlipbookViewer.module.css';
 import { saveReadingHistory } from '@/app/actions/magazines';
