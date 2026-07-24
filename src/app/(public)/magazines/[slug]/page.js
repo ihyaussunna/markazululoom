@@ -47,12 +47,8 @@ export default async function MagazineReaderPage({ params }) {
   // We can pass userId to allow saving progress.
 
   // Next.js Server Components cannot pass Date objects to Client Components
-  const safeMagazine = {
-    ...magazine,
-    createdAt: magazine.createdAt?.toISOString() || null,
-    updatedAt: magazine.updatedAt?.toISOString() || null,
-    publishedAt: magazine.publishedAt?.toISOString() || null
-  };
+  // We use JSON.parse(JSON.stringify()) to absolutely guarantee NO non-serializable objects (like Decimal or strange Prisma objects) are passed down.
+  const safeMagazine = JSON.parse(JSON.stringify(magazine));
 
   return (
     <FlipbookWrapper 
