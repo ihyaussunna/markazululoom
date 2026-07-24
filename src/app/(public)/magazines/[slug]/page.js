@@ -6,8 +6,9 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
+  const decodedSlug = decodeURIComponent(resolvedParams.slug);
   const magazine = await prisma.magazine.findUnique({
-    where: { slug: resolvedParams.slug }
+    where: { slug: decodedSlug }
   });
 
   if (!magazine) return { title: 'Not Found' };
@@ -23,8 +24,9 @@ export async function generateMetadata({ params }) {
 
 export default async function MagazineReaderPage({ params }) {
   const resolvedParams = await params;
+  const decodedSlug = decodeURIComponent(resolvedParams.slug);
   const magazine = await prisma.magazine.findUnique({
-    where: { slug: resolvedParams.slug, isActive: true }
+    where: { slug: decodedSlug, isActive: true }
   });
 
   if (!magazine) {
