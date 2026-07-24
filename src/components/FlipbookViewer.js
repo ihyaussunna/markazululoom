@@ -53,6 +53,7 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
   const [zoom, setZoom] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
   
   const bookRef = useRef();
   const containerRef = useRef();
@@ -75,6 +76,12 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
+  }
+
+  function onDocumentLoadProgress({ loaded, total }) {
+    if (total) {
+      setLoadingProgress(Math.round((loaded / total) * 100));
+    }
   }
 
   const handleZoomIn = () => setZoom(prev => Math.min(prev + 0.2, 3));
@@ -207,7 +214,16 @@ export default function FlipbookViewer({ magazine, userId, initialPage = 0 }) {
             file={`/api/proxy-pdf?url=${encodeURIComponent(magazine.pdfLink)}`}
             options={pdfOptions}
             onLoadSuccess={onDocumentLoadSuccess}
-            loading={<div className={styles.loadingState}>Loading Document...</div>}
+            onLoadProgress={onDocumentLoadProgress}
+            loading={
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                <div style={{ marginBottom: '1rem', fontSize: '1.2rem', color: 'var(--text-secondary)' }}>Downloading Magazine... {loadingProgress}%</div>
+                <div style={{ width: '250px', height: '8px', backgroundColor: 'var(--border-color)', borderRadius: '4px', overflow: 'hidden' }}>
+                  <div style={{ width: `${loadingProgress}%`, height: '100%', backgroundColor: 'var(--primary-color)', transition: 'width 0.3s ease-out' }}></div>
+                </div>
+                <div style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>This may take a minute for large files.</div>
+              </div>
+            }
             className={styles.pdfDocument}
           >
             {numPages && (
