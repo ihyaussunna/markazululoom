@@ -1,53 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;600;800&display=swap');
 
 :root {
-  /* Globeats Logo Palette: Navy Blue, White, Black */
+  /* Exact Globeats Official Logo Color Palette */
   --bg-color: #F8FAFC;
   --surface-color: #FFFFFF;
-  --text-primary: #0A0F1D;
-  --text-secondary: #475569;
+  --text-primary: #020731;       /* Globeats Logo Text Midnight Blue */
+  --text-secondary: #4A5568;
   
-  --primary-color: #002B5B;      /* Globeats Core Deep Navy Blue */
-  --primary-hover: #001C3D;
-  --primary-dark: #000531;       /* Globeats Logo Base Midnight Blue */
-  --secondary-color: #0047AB;    /* Globeats Royal Blue Accent */
-  --accent-color: #1D4ED8;       /* Vibrant Action Blue */
+  --primary-color: #004AAD;      /* Exact Globeats 'G' Logo Vibrant Royal Blue */
+  --primary-hover: #003B8A;      /* Deeper royal blue on hover */
+  --primary-dark: #020731;       /* Exact Globeats.in Deep Midnight Navy */
+  --secondary-color: #0057CC;    /* Supporting Bright Blue */
+  --accent-color: #004AAD;       /* Accent matching the G badge */
   --border-color: #E2E8F0;
-  --logo-color: #000531;
+  --logo-color: #004AAD;
+  --logo-dark: #020731;
 
   --nav-bg: #FFFFFF;
   --nav-bg-rgb: 255, 255, 255;
-  --footer-bg: #000531;          /* Globeats Midnight Blue Footer */
-  --footer-text: #F8FAFC;
+  --footer-bg: #020731;          /* Globeats Midnight Navy Footer */
+  --footer-text: #FFFFFF;
 
-  --shadow-sm: 0 1px 3px 0 rgba(0, 5, 49, 0.05);
-  --shadow-md: 0 4px 14px 0 rgba(0, 5, 49, 0.08);
-  --shadow-lg: 0 12px 36px rgba(0, 5, 49, 0.12);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 74, 173, 0.06);
+  --shadow-md: 0 4px 14px 0 rgba(0, 74, 173, 0.1);
+  --shadow-lg: 0 12px 36px rgba(0, 74, 173, 0.15);
   --radius-lg: 12px;
 }
 
 [data-theme='dark'] {
-  --bg-color: #030712;
-  --surface-color: #0A1124;
-  --text-primary: #F8FAFC;
+  --bg-color: #010314;           /* Deep midnight black/navy */
+  --surface-color: #070D24;      /* Deep Globeats navy surface */
+  --text-primary: #FFFFFF;
   --text-secondary: #94A3B8;
   
-  --primary-color: #38BDF8;      /* Electric Sky Blue for dark mode readability */
-  --primary-hover: #7DD3FC;
-  --primary-dark: #000531;
-  --secondary-color: #60A5FA;    
-  --accent-color: #93C5FD;       
-  --border-color: #1E293B;
-  --logo-color: #60A5FA;
+  --primary-color: #004AAD;      /* Exact Globeats Logo Blue */
+  --primary-hover: #38BDF8;
+  --primary-dark: #020731;
+  --secondary-color: #38BDF8;    
+  --accent-color: #60A5FA;       
+  --border-color: #16203D;
+  --logo-color: #38BDF8;
+  --logo-dark: #FFFFFF;
 
-  --nav-bg: #030712;
-  --nav-bg-rgb: 3, 7, 18;
-  --footer-bg: #020617;
-  --footer-text: #F8FAFC;
+  --nav-bg: #010314;
+  --nav-bg-rgb: 1, 3, 20;
+  --footer-bg: #01020D;
+  --footer-text: #FFFFFF;
 
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 14px 0 rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.7);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 14px 0 rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.8);
 }
 
 html {
