@@ -60,12 +60,12 @@
 }
 
 .nav a {
-  padding: 0.8rem 1.2rem;
+  padding: 0.75rem 1.1rem;
   border-radius: var(--radius-lg);
   color: var(--text-primary);
   font-weight: 600;
   font-size: 0.95rem;
-  transition: all 0.2s ease;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
   border: 1px solid transparent;
 }
 
@@ -83,18 +83,24 @@
 
 .logoutBtn {
   width: 100%;
-  padding: 0.9rem;
-  background-color: rgba(239, 68, 68, 0.1);
+  padding: 0.85rem;
+  background-color: rgba(239, 68, 68, 0.08);
   color: #ef4444;
   border-radius: var(--radius-lg);
   font-weight: 700;
-  transition: all 0.2s ease;
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(239, 68, 68, 0.18);
 }
 
 .logoutBtn:hover {
   background-color: #ef4444;
   color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+.logoutBtn:active {
+  transform: scale(0.98);
 }
 
 .mainContent {
@@ -115,22 +121,32 @@
   font-size: 2rem;
   font-family: 'Outfit', sans-serif;
   font-weight: 700;
+  color: var(--text-primary);
 }
 
 .primaryBtn {
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: #fff;
-  padding: 0.8rem 1.5rem;
+  padding: 0.8rem 1.6rem;
   border-radius: var(--radius-lg);
-  font-weight: 600;
-  box-shadow: var(--shadow-md);
-  transition: all 0.3s ease;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(0, 43, 91, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
 }
 
 .primaryBtn:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(0, 43, 91, 0.35);
+  filter: brightness(1.08);
+}
+
+.primaryBtn:active {
+  transform: scale(0.98);
 }
 
 .table {

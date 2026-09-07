@@ -3,6 +3,7 @@ import { updatePost } from '@/app/actions/post';
 import styles from '../../../admin.module.css';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import AuthorSelector from '@/components/AuthorSelector';
 
 export default async function EditPostPage(props) {
   const { id } = await props.params;
@@ -16,7 +17,9 @@ export default async function EditPostPage(props) {
   }
 
   const categories = await prisma.category.findMany();
-  const authors = await prisma.author.findMany();
+  const authors = await prisma.author.findMany({
+    orderBy: { name: 'asc' }
+  });
 
   return (
     <div>
@@ -43,13 +46,7 @@ export default async function EditPostPage(props) {
                 {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
               </select>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexGrow: 1 }}>
-              <label htmlFor="authorId" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Author</label>
-              <select id="authorId" name="authorId" defaultValue={post.authorId} required style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }}>
-                <option value="">Select Author...</option>
-                {authors.map(a => <option key={a.id} value={a.id}>{a.name}</option>)}
-              </select>
-            </div>
+            <AuthorSelector initialAuthors={authors} defaultValue={post.authorId} />
           </div>
 
           <div style={{ display: 'flex', gap: '1rem' }}>
