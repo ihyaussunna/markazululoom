@@ -2,13 +2,12 @@ import { prisma } from '@/lib/prisma';
 import { createCategory, deleteCategory } from '@/app/actions/category';
 import styles from '../admin.module.css';
 import SubmitButton from '@/components/SubmitButton';
+import { getCategories } from '@/lib/categories';
 
 export const dynamic = 'force-dynamic';
 
 export default async function CategoriesPage() {
-  const categories = await prisma.category.findMany({
-    orderBy: { createdAt: 'desc' }
-  });
+  const categories = await getCategories();
 
   return (
     <div>

@@ -4,6 +4,8 @@ import Link from 'next/link';
 import styles from '../admin.module.css';
 import SubmitButton from '@/components/SubmitButton';
 import AuthorSelector from '@/components/AuthorSelector';
+import CategorySelector from '@/components/CategorySelector';
+import { getCategories } from '@/lib/categories';
 
 export const dynamic = 'force-dynamic';
 
@@ -14,7 +16,7 @@ export default async function PostsPage() {
       orderBy: { createdAt: 'desc' }
     });
 
-    const categories = await prisma.category.findMany();
+    const categories = await getCategories();
     const authors = await prisma.author.findMany({
       orderBy: { name: 'asc' }
     });
@@ -35,13 +37,7 @@ export default async function PostsPage() {
             </div>
 
             <div style={{ display: 'flex', gap: '1rem' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexGrow: 1 }}>
-                <label htmlFor="categoryId" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Category</label>
-                <select id="categoryId" name="categoryId" required style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }}>
-                  <option value="">Select Category...</option>
-                  {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-                </select>
-              </div>
+              <CategorySelector initialCategories={categories} />
               <AuthorSelector initialAuthors={authors} />
             </div>
 
