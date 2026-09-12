@@ -28,11 +28,8 @@ export function getTextStyle(text, categorySlug = '', options = {}) {
     };
   }
 
-  if (isMalayalam(text)) {
-    return {
-      fontFamily: "'Anek Malayalam', sans-serif",
-    };
-  }
-
+  // For non-Arabic text (Malayalam, English, etc.), return empty object
+  // so that the configured Blog Title Font (like FKL-Dhikk) or Post Content Font
+  // from Site Settings applies cleanly via CSS classes without being overridden by inline styles!
   return {};
 }

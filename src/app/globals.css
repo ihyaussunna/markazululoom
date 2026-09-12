@@ -1,5 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700;800&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Anek+Malayalam:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Outfit:wght@300;400;600;800&family=Tajawal:wght@400;500;700;800;900&display=swap');
 
+@font-face {
+  font-family: 'FKL-Dhikk';
+  src: url('/fonts/FKL-Dhikk-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FKL-Dhikk-Bold';
+  src: url('/fonts/FKL-Dhikk-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Exact Globeats Official Logo Color Palette */
   --bg-color: #F8FAFC;

@@ -47,7 +47,7 @@ export default async function RootLayout({ children }) {
   // Map settings to actual CSS font-family strings
   const getFontFamily = (fontSetting) => {
     switch (fontSetting) {
-      case 'fkl-dhikk': return 'var(--font-dhikk), sans-serif';
+      case 'fkl-dhikk': return "var(--font-dhikk), 'FKL-Dhikk', 'FKL-Dhikk-Bold', 'Anek Malayalam', sans-serif";
       case 'inter': return 'var(--font-inter), sans-serif';
       case 'outfit': return 'var(--font-outfit), sans-serif';
       case 'raleway': return 'var(--font-raleway), sans-serif';
