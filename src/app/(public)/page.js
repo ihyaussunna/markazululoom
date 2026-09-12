@@ -63,7 +63,7 @@ export default async function HomePage() {
                   {featuredPost.category.slug === 'saqafa' ? 'ثقافة | SAQAFA' : featuredPost.category.name}
                 </Link>
                 <Link href={`/post/${featuredPost.slug}`}>
-                  <h1 className={styles.heroTitle} style={getTextStyle(featuredPost.title, featuredPost.category?.slug, { lineHeight: 1.3 })}>
+                  <h1 className={styles.heroTitle} style={getTextStyle(featuredPost.title, featuredPost.category?.slug, { isHeading: true, lineHeight: 1.35 })}>
                     {featuredPost.title}
                   </h1>
                 </Link>
@@ -91,7 +91,7 @@ export default async function HomePage() {
                       {post.category.slug === 'saqafa' ? 'ثقافة' : post.category.name}
                     </Link>
                     <Link href={`/post/${post.slug}`}>
-                      <h3 className={styles.sidebarTitle} style={getTextStyle(post.title, post.category?.slug, { lineHeight: 1.3 })}>
+                      <h3 className={styles.sidebarTitle} style={getTextStyle(post.title, post.category?.slug, { isHeading: true, lineHeight: 1.35 })}>
                         {post.title}
                       </h3>
                     </Link>
@@ -110,7 +110,7 @@ export default async function HomePage() {
       {categories.map(category => category.posts.length > 0 && (
         <section key={category.id} className={styles.categorySection}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle} style={category.slug === 'saqafa' ? { fontFamily: "var(--font-arabic-heading), 'Amiri', sans-serif", direction: 'rtl', textAlign: 'right' } : {}}>
+            <h2 className={styles.sectionTitle} style={category.slug === 'saqafa' ? { fontFamily: "var(--font-arabic-heading), 'Cairo', 'Alexandria', sans-serif", direction: 'rtl', textAlign: 'right' } : {}}>
               {category.slug === 'saqafa' ? 'ثقافة | SAQAFA' : category.name.toUpperCase()}
             </h2>
           </div>
@@ -131,7 +131,7 @@ export default async function HomePage() {
                     {category.slug === 'saqafa' ? 'ثقافة' : category.name}
                   </Link>
                   <Link href={`/post/${post.slug}`}>
-                    <h3 className={styles.gridTitle} style={getTextStyle(post.title, category.slug, { lineHeight: 1.3 })}>
+                    <h3 className={styles.gridTitle} style={getTextStyle(post.title, category.slug, { isHeading: true, lineHeight: 1.35 })}>
                       {post.title}
                     </h3>
                   </Link>

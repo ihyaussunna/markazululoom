@@ -1,5 +1,19 @@
 import localFont from 'next/font/local';
-import { Inter, Raleway, Ubuntu, Poppins, Montserrat, Outfit, Geo, Amiri, Cairo } from 'next/font/google';
+import { 
+  Inter, 
+  Raleway, 
+  Ubuntu, 
+  Poppins, 
+  Montserrat, 
+  Outfit, 
+  Geo, 
+  Amiri, 
+  Cairo,
+  Tajawal,
+  Alexandria,
+  IBM_Plex_Sans_Arabic,
+  Noto_Kufi_Arabic
+} from 'next/font/google';
 
 export const fklDhikk = localFont({
   src: '../../public/fonts/FKL-Dhikk-Bold.ttf',
@@ -60,9 +74,38 @@ export const amiri = Amiri({
 });
 
 export const cairo = Cairo({
-  weight: ['400', '600', '700', '800'],
+  weight: ['400', '600', '700', '800', '900'],
   subsets: ['arabic'],
   variable: '--font-cairo',
   display: 'swap',
 });
+
+export const tajawal = Tajawal({
+  weight: ['400', '500', '700', '800'],
+  subsets: ['arabic'],
+  variable: '--font-tajawal',
+  display: 'swap',
+});
+
+export const alexandria = Alexandria({
+  weight: ['400', '600', '700', '800'],
+  subsets: ['arabic'],
+  variable: '--font-alexandria',
+  display: 'swap',
+});
+
+export const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['arabic'],
+  variable: '--font-ibm-plex',
+  display: 'swap',
+});
+
+export const notoKufiArabic = Noto_Kufi_Arabic({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['arabic'],
+  variable: '--font-noto-kufi',
+  display: 'swap',
+});
+
 

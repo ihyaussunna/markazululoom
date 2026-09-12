@@ -15,6 +15,7 @@ export default async function SettingsPage() {
   const currentTitleFont = settingsMap['titleFont'] || 'fkl-dhikk';
   const currentTextFont = settingsMap['textFont'] || 'anek-malayalam';
   const currentUiFont = settingsMap['uiFont'] || 'inter';
+  const currentArabicFont = settingsMap['arabicFont'] || 'tajawal';
 
   const banners = await prisma.banner.findMany({
     orderBy: { order: 'asc' }
@@ -32,11 +33,28 @@ export default async function SettingsPage() {
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              <label htmlFor="arabicFont" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'bold' }}>
+                Arabic Typography Font (അറബിക് ഫോണ്ട്)
+              </label>
+              <select id="arabicFont" name="arabicFont" defaultValue={currentArabicFont} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }}>
+                <option value="tajawal">✨ Tajawal (Modern Aesthetic - تجوال) [Default / Adipoli]</option>
+                <option value="ibm-plex">🚀 IBM Plex Sans Arabic (Digital Modern - بليكس)</option>
+                <option value="cairo">🔷 Cairo (Bold Modern Impact - كايرو)</option>
+                <option value="alexandria">💎 Alexandria (Ultra Sleek - الإسكندرية)</option>
+                <option value="noto-kufi">🏛️ Noto Kufi Arabic (Executive Modern Kufi - كوفي)</option>
+                <option value="amiri">📜 Amiri (Classical Heritage / Traditional Naskh - أميري)</option>
+              </select>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="titleFont" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'bold' }}>Blog Title Font</label>
               <select id="titleFont" name="titleFont" defaultValue={currentTitleFont} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }}>
                 <option value="fkl-dhikk">FKL-Dhikk Bold (Local Font)</option>
-                <option value="amiri">Amiri (Arabic Literature / Poetry - أميري)</option>
+                <option value="tajawal">Tajawal (Modern Arabic - تجوال)</option>
                 <option value="cairo">Cairo (Modern Arabic / Headings - كايرو)</option>
+                <option value="ibm-plex">IBM Plex Sans Arabic (بليكس)</option>
+                <option value="alexandria">Alexandria (الإسكندرية)</option>
+                <option value="amiri">Amiri (Arabic Literature - أميري)</option>
                 <option value="anek-malayalam">Anek Malayalam</option>
                 <option value="manjari">Manjari</option>
                 <option value="inter">Inter</option>
@@ -52,7 +70,9 @@ export default async function SettingsPage() {
               <label htmlFor="uiFont" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'bold' }}>Website Font</label>
               <select id="uiFont" name="uiFont" defaultValue={currentUiFont} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }}>
                 <option value="inter">Inter</option>
+                <option value="tajawal">Tajawal (Modern Arabic - تجوال)</option>
                 <option value="cairo">Cairo (Modern Arabic - كايرو)</option>
+                <option value="ibm-plex">IBM Plex Sans Arabic (بليكس)</option>
                 <option value="raleway">Raleway</option>
                 <option value="ubuntu">Ubuntu</option>
                 <option value="poppins">Poppins</option>
@@ -65,8 +85,10 @@ export default async function SettingsPage() {
               <label htmlFor="textFont" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'bold' }}>Post Content Text Font</label>
               <select id="textFont" name="textFont" defaultValue={currentTextFont} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }}>
                 <option value="anek-malayalam">Anek Malayalam</option>
-                <option value="amiri">Amiri (Arabic Literature / Poetry - أميري)</option>
+                <option value="tajawal">Tajawal (Modern Arabic - تجوال)</option>
+                <option value="ibm-plex">IBM Plex Sans Arabic (بليكس)</option>
                 <option value="cairo">Cairo (Modern Arabic - كايرو)</option>
+                <option value="amiri">Amiri (Arabic Literature - أميري)</option>
                 <option value="manjari">Manjari</option>
                 <option value="inter">Inter</option>
                 <option value="raleway">Raleway</option>

@@ -1,6 +1,21 @@
 import "./globals.css";
 import { prisma } from '@/lib/prisma';
-import { fklDhikk, inter, raleway, ubuntu, poppins, montserrat, outfit, geo, amiri, cairo } from '@/lib/fonts';
+import { 
+  fklDhikk, 
+  inter, 
+  raleway, 
+  ubuntu, 
+  poppins, 
+  montserrat, 
+  outfit, 
+  geo, 
+  amiri, 
+  cairo,
+  tajawal,
+  alexandria,
+  ibmPlexSansArabic,
+  notoKufiArabic
+} from '@/lib/fonts';
 import AuthProvider from '@/components/AuthProvider';
 
 export const metadata = {
@@ -12,6 +27,7 @@ export default async function RootLayout({ children }) {
   let titleFont = 'fkl-dhikk';
   let textFont = 'anek-malayalam';
   let uiFont = 'inter';
+  let arabicFont = 'tajawal';
 
   try {
     const settings = await prisma.siteSetting.findMany();
@@ -23,6 +39,7 @@ export default async function RootLayout({ children }) {
     if (settingsMap['titleFont']) titleFont = settingsMap['titleFont'];
     if (settingsMap['textFont']) textFont = settingsMap['textFont'];
     if (settingsMap['uiFont']) uiFont = settingsMap['uiFont'];
+    if (settingsMap['arabicFont']) arabicFont = settingsMap['arabicFont'];
   } catch (e) {
     console.error("Failed to load site settings", e);
   }
@@ -39,24 +56,66 @@ export default async function RootLayout({ children }) {
       case 'montserrat': return 'var(--font-montserrat), sans-serif';
       case 'manjari': return "'Manjari', sans-serif";
       case 'anek-malayalam': return "'Anek Malayalam', sans-serif";
-      case 'amiri': return "var(--font-amiri), 'Amiri', 'Noto Naskh Arabic', serif";
+      case 'tajawal': return "var(--font-tajawal), 'Tajawal', sans-serif";
+      case 'ibm-plex': return "var(--font-ibm-plex), 'IBM Plex Sans Arabic', sans-serif";
       case 'cairo': return "var(--font-cairo), 'Cairo', sans-serif";
+      case 'alexandria': return "var(--font-alexandria), 'Alexandria', sans-serif";
+      case 'noto-kufi': return "var(--font-noto-kufi), 'Noto Kufi Arabic', sans-serif";
+      case 'amiri': return "var(--font-amiri), 'Amiri', serif";
       default: return "'Inter', sans-serif";
     }
   };
+
+  const getArabicFonts = (setting) => {
+    switch (setting) {
+      case 'ibm-plex':
+        return {
+          heading: "var(--font-ibm-plex), 'IBM Plex Sans Arabic', var(--font-cairo), 'Cairo', sans-serif",
+          body: "var(--font-ibm-plex), 'IBM Plex Sans Arabic', sans-serif",
+        };
+      case 'cairo':
+        return {
+          heading: "var(--font-cairo), 'Cairo', sans-serif",
+          body: "var(--font-cairo), 'Cairo', var(--font-tajawal), 'Tajawal', sans-serif",
+        };
+      case 'alexandria':
+        return {
+          heading: "var(--font-alexandria), 'Alexandria', var(--font-cairo), 'Cairo', sans-serif",
+          body: "var(--font-alexandria), 'Alexandria', var(--font-tajawal), 'Tajawal', sans-serif",
+        };
+      case 'noto-kufi':
+        return {
+          heading: "var(--font-noto-kufi), 'Noto Kufi Arabic', sans-serif",
+          body: "var(--font-noto-kufi), 'Noto Kufi Arabic', var(--font-tajawal), 'Tajawal', sans-serif",
+        };
+      case 'amiri':
+        return {
+          heading: "var(--font-cairo), 'Cairo', var(--font-amiri), 'Amiri', serif",
+          body: "var(--font-amiri), 'Amiri', 'Noto Naskh Arabic', serif",
+        };
+      case 'tajawal':
+      default:
+        return {
+          heading: "var(--font-cairo), 'Cairo', var(--font-alexandria), 'Alexandria', var(--font-tajawal), 'Tajawal', sans-serif",
+          body: "var(--font-tajawal), 'Tajawal', var(--font-ibm-plex), 'IBM Plex Sans Arabic', var(--font-cairo), 'Cairo', sans-serif",
+        };
+    }
+  };
+
+  const arabicStyles = getArabicFonts(arabicFont);
 
   const cssVariables = `
     :root {
       --font-title-dynamic: ${getFontFamily(titleFont)};
       --font-text-dynamic: ${getFontFamily(textFont)};
       --font-ui-dynamic: ${getFontFamily(uiFont)};
-      --font-arabic: var(--font-amiri), 'Amiri', 'Noto Naskh Arabic', serif;
-      --font-arabic-heading: var(--font-cairo), 'Cairo', var(--font-amiri), 'Amiri', serif;
+      --font-arabic-heading: ${arabicStyles.heading};
+      --font-arabic: ${arabicStyles.body};
     }
   `;
 
   return (
-    <html lang="en" className={`${fklDhikk.variable} ${inter.variable} ${raleway.variable} ${ubuntu.variable} ${poppins.variable} ${montserrat.variable} ${outfit.variable} ${geo.variable} ${amiri.variable} ${cairo.variable}`}>
+    <html lang="en" className={`${fklDhikk.variable} ${inter.variable} ${raleway.variable} ${ubuntu.variable} ${poppins.variable} ${montserrat.variable} ${outfit.variable} ${geo.variable} ${amiri.variable} ${cairo.variable} ${tajawal.variable} ${alexandria.variable} ${ibmPlexSansArabic.variable} ${notoKufiArabic.variable}`}>
       <head>
         <style dangerouslySetInnerHTML={{ __html: cssVariables }} />
         <script

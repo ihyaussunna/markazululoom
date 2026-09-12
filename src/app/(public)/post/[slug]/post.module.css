@@ -237,34 +237,43 @@
 }
 
 .arabicTitle {
-  font-family: var(--font-arabic), 'Amiri', 'Cairo', serif !important;
+  font-family: var(--font-arabic-heading), 'Cairo', 'Alexandria', 'Tajawal', sans-serif !important;
   direction: rtl;
   text-align: right;
-  line-height: 1.4 !important;
-  font-size: 3.2rem;
+  line-height: 1.45 !important;
+  font-size: 3rem;
+  font-weight: 800 !important;
   letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .arabicContent {
-  font-family: var(--font-arabic), 'Amiri', 'Noto Naskh Arabic', serif !important;
+  font-family: var(--font-arabic), 'Tajawal', 'IBM Plex Sans Arabic', 'Cairo', sans-serif !important;
   direction: rtl !important;
   text-align: right !important;
-  font-size: 1.35rem !important;
-  line-height: 2.2 !important;
-  word-spacing: 0.04em;
+  font-size: 1.32rem !important;
+  font-weight: 500 !important;
+  line-height: 2.15 !important;
+  word-spacing: 0.05em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .arabicContent p {
-  margin-bottom: 2rem;
+  margin-bottom: 2.2rem;
+  line-height: 2.15;
 }
 
 .arabicContent h1, .arabicContent h2, .arabicContent h3, .arabicContent h4 {
-  font-family: var(--font-arabic-heading), 'Cairo', var(--font-arabic), serif !important;
+  font-family: var(--font-arabic-heading), 'Cairo', 'Alexandria', 'Tajawal', sans-serif !important;
   direction: rtl;
   text-align: right;
   line-height: 1.5;
+  font-weight: 800;
   margin-top: 3rem;
   margin-bottom: 1.2rem;
+  -webkit-font-smoothing: antialiased;
 }
 
 .arabicContent blockquote {
@@ -274,13 +283,17 @@
   padding-right: 1.5rem;
   margin: 2.5rem 0;
   font-style: normal;
-  font-size: 1.4rem;
+  font-size: 1.38rem;
   line-height: 2.2;
+  font-weight: 500;
+  background-color: rgba(0, 74, 173, 0.03);
+  border-radius: 4px 0 0 4px;
 }
 
 @media (max-width: 768px) {
   .arabicTitle {
-    font-size: 2.2rem;
+    font-size: 2.1rem;
+    line-height: 1.4 !important;
   }
   .arabicContent {
     font-size: 1.18rem !important;

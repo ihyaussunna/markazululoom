@@ -75,7 +75,7 @@ export default async function SinglePostPage(props) {
           <Link href={`/category/${post.category.slug}`} className={styles.categoryLabel}>
             {isSaqafa ? 'ثقافة | SAQAFA' : post.category.name}
           </Link>
-          <h1 className={`${styles.title} ${isArabicPost ? styles.arabicTitle : ''}`} style={getTextStyle(post.title, post.category.slug, { lineHeight: 1.4 })}>
+          <h1 className={`${styles.title} ${isArabicPost ? styles.arabicTitle : ''}`} style={getTextStyle(post.title, post.category.slug, { isHeading: true, lineHeight: 1.45 })}>
             {post.title}
           </h1>
           <div className={styles.meta}>

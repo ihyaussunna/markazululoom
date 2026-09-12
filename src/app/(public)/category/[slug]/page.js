@@ -35,10 +35,10 @@ export default async function CategoryPage(props) {
       <div style={{ marginBottom: '3rem', borderBottom: '2px solid var(--primary-color)', paddingBottom: '1rem', display: 'inline-block', width: '100%' }}>
         {isSaqafa ? (
           <div>
-            <h1 style={{ fontFamily: "var(--font-arabic-heading), 'Amiri', sans-serif", fontSize: '2.8rem', color: 'var(--text-primary)', direction: 'rtl', textAlign: 'right' }}>
+            <h1 style={{ fontFamily: "var(--font-arabic-heading), 'Cairo', 'Alexandria', 'Tajawal', sans-serif", fontSize: '2.8rem', fontWeight: 800, color: 'var(--text-primary)', direction: 'rtl', textAlign: 'right' }}>
               ثقافة | SAQAFA
             </h1>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginTop: '0.4rem', direction: 'rtl', textAlign: 'right', fontFamily: "var(--font-arabic), 'Amiri', serif" }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', marginTop: '0.4rem', direction: 'rtl', textAlign: 'right', fontFamily: "var(--font-arabic), 'Tajawal', sans-serif", fontWeight: 500 }}>
               المقالات الأدبية، القصص والشعر العربي
             </p>
           </div>
@@ -50,7 +50,7 @@ export default async function CategoryPage(props) {
       </div>
 
       {posts.length === 0 ? (
-        <p style={{ color: 'var(--text-secondary)', ...(isSaqafa ? { direction: 'rtl', textAlign: 'right', fontFamily: "var(--font-arabic), 'Amiri', serif", fontSize: '1.2rem' } : {}) }}>
+        <p style={{ color: 'var(--text-secondary)', ...(isSaqafa ? { direction: 'rtl', textAlign: 'right', fontFamily: "var(--font-arabic), 'Tajawal', sans-serif", fontSize: '1.2rem', fontWeight: 500 } : {}) }}>
           {isSaqafa ? 'لا توجد مقالات منشورة في هذا القسم حتى الآن.' : 'No posts available in this category yet.'}
         </p>
       ) : (
@@ -67,7 +67,7 @@ export default async function CategoryPage(props) {
                 </div>
                 <div className={styles.cardContent} dir={isSaqafa || isArabic(post.title) ? 'rtl' : 'ltr'}>
                   <Link href={`/post/${post.slug}`}>
-                    <h3 className={styles.cardTitle} style={getTextStyle(post.title, category.slug, { lineHeight: 1.4 })}>
+                    <h3 className={styles.cardTitle} style={getTextStyle(post.title, category.slug, { isHeading: true, lineHeight: 1.45 })}>
                       {post.title}
                     </h3>
                   </Link>

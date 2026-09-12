@@ -17,10 +17,13 @@ export function getTextStyle(text, categorySlug = '', options = {}) {
 
   if (isArabicText) {
     return {
-      fontFamily: "var(--font-arabic), 'Amiri', 'Noto Naskh Arabic', serif",
+      fontFamily: options.isHeading
+        ? "var(--font-arabic-heading), 'Cairo', 'Alexandria', 'Tajawal', sans-serif"
+        : "var(--font-arabic), 'Tajawal', 'IBM Plex Sans Arabic', 'Cairo', sans-serif",
       direction: 'rtl',
       textAlign: options.align || (options.center ? 'center' : 'right'),
-      lineHeight: options.lineHeight || 1.8,
+      lineHeight: options.lineHeight || (options.isHeading ? 1.45 : 2.15),
+      fontWeight: options.fontWeight || (options.isHeading ? 800 : 500),
       letterSpacing: '0',
     };
   }
