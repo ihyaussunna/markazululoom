@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Anek+Malayalam:wght@300;400;500;600;700;800&family=Cairo:wght@400;600;700;800&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Outfit:wght@300;400;600;800&display=swap');
 
 :root {
   /* Exact Globeats Official Logo Color Palette */
@@ -20,6 +20,10 @@
   --nav-bg-rgb: 255, 255, 255;
   --footer-bg: #020731;          /* Globeats Midnight Navy Footer */
   --footer-text: #FFFFFF;
+
+  /* Arabic Typography Fonts */
+  --font-arabic: 'Amiri', 'Noto Naskh Arabic', 'Cairo', serif;
+  --font-arabic-heading: 'Cairo', 'Amiri', serif;
 
   --shadow-sm: 0 1px 3px 0 rgba(0, 74, 173, 0.06);
   --shadow-md: 0 4px 14px 0 rgba(0, 74, 173, 0.1);
@@ -124,4 +128,31 @@ input, textarea, select {
 .text-primary { color: var(--text-primary); }
 .text-secondary { color: var(--text-secondary); }
 .bg-surface { background-color: var(--surface-color); }
+
+/* Arabic Typography */
+.arabic-text {
+  font-family: var(--font-arabic), 'Amiri', 'Noto Naskh Arabic', serif !important;
+  direction: rtl;
+  text-align: right;
+  line-height: 2.1;
+  font-size: 1.25rem;
+}
+
+.arabic-title {
+  font-family: var(--font-arabic), 'Amiri', 'Cairo', serif !important;
+  direction: rtl;
+  text-align: right;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.arabic-poetry {
+  font-family: var(--font-arabic), 'Amiri', serif !important;
+  direction: rtl;
+  text-align: center;
+  line-height: 2.3;
+  font-size: 1.35rem;
+  white-space: pre-wrap;
+}
+
 

@@ -1,5 +1,5 @@
 import localFont from 'next/font/local';
-import { Inter, Raleway, Ubuntu, Poppins, Montserrat, Outfit, Geo } from 'next/font/google';
+import { Inter, Raleway, Ubuntu, Poppins, Montserrat, Outfit, Geo, Amiri, Cairo } from 'next/font/google';
 
 export const fklDhikk = localFont({
   src: '../../public/fonts/FKL-Dhikk-Bold.ttf',
@@ -51,3 +51,18 @@ export const geo = Geo({
   variable: '--font-geo',
   display: 'swap',
 });
+
+export const amiri = Amiri({
+  weight: ['400', '700'],
+  subsets: ['arabic'],
+  variable: '--font-amiri',
+  display: 'swap',
+});
+
+export const cairo = Cairo({
+  weight: ['400', '600', '700', '800'],
+  subsets: ['arabic'],
+  variable: '--font-cairo',
+  display: 'swap',
+});
+

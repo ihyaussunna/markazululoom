@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma';
 import styles from './post.module.css';
 import PostReactions from '@/components/PostReactions';
 import PostComments from '@/components/PostComments';
+import { isArabic, getTextStyle } from '@/lib/typography';
 
 export const revalidate = 60;
 
@@ -23,6 +24,9 @@ export default async function SinglePostPage(props) {
       </div>
     );
   }
+
+  const isSaqafa = post.category.slug === 'saqafa';
+  const isArabicPost = isSaqafa || isArabic(post.title) || isArabic(post.content);
 
   // A simple function to safely render video embeds from YouTube or Instagram URLs
   const renderVideo = (url) => {
@@ -66,12 +70,14 @@ export default async function SinglePostPage(props) {
 
   return (
     <article className={styles.article}>
-      <header className={styles.header}>
+      <header className={`${styles.header} ${isArabicPost ? styles.arabicHeader : ''}`} dir={isArabicPost ? 'rtl' : 'ltr'}>
         <div className="container">
           <Link href={`/category/${post.category.slug}`} className={styles.categoryLabel}>
-            {post.category.name}
+            {isSaqafa ? 'ثقافة | SAQAFA' : post.category.name}
           </Link>
-          <h1 className={styles.title}>{post.title}</h1>
+          <h1 className={`${styles.title} ${isArabicPost ? styles.arabicTitle : ''}`} style={getTextStyle(post.title, post.category.slug, { lineHeight: 1.4 })}>
+            {post.title}
+          </h1>
           <div className={styles.meta}>
             <div className={styles.authorInfo}>
               {post.author.profileImageUrl ? (
@@ -80,7 +86,7 @@ export default async function SinglePostPage(props) {
                 <div className={styles.authorPlaceholder}>{post.author.name.charAt(0)}</div>
               )}
               <div className={styles.authorText}>
-                <span className={styles.authorName} style={/[\u0D00-\u0D7F]/.test(post.author.name) ? { fontFamily: "'Anek Malayalam', sans-serif" } : {}}>{post.author.name}</span>
+                <span className={styles.authorName} style={getTextStyle(post.author.name)}>{post.author.name}</span>
                 <p>{new Date(post.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
               </div>
             </div>
@@ -98,7 +104,8 @@ export default async function SinglePostPage(props) {
 
       <div className={`container ${styles.contentContainer}`}>
         <div 
-          className={styles.content}
+          className={`${styles.content} ${isArabicPost ? styles.arabicContent : ''}`}
+          dir={isArabicPost ? 'rtl' : 'auto'}
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
         
@@ -113,19 +120,20 @@ export default async function SinglePostPage(props) {
         <PostComments postId={post.id} />
         
         {post.author.bio && (
-          <div className={styles.authorBioCard}>
+          <div className={styles.authorBioCard} dir={isArabic(post.author.bio) ? 'rtl' : 'auto'}>
             <div className={styles.bioHeader}>
               {post.author.profileImageUrl ? (
                 <img src={post.author.profileImageUrl} alt={post.author.name} className={styles.authorImgLarge} />
               ) : (
                 <div className={styles.authorPlaceholderLarge}>{post.author.name.charAt(0)}</div>
               )}
-              <h3 style={/[\u0D00-\u0D7F]/.test(post.author.name) ? { fontFamily: "'Anek Malayalam', sans-serif" } : {}}>About {post.author.name}</h3>
+              <h3 style={getTextStyle(post.author.name)}>About {post.author.name}</h3>
             </div>
-            <p className={styles.bioText}>{post.author.bio}</p>
+            <p className={styles.bioText} style={getTextStyle(post.author.bio)}>{post.author.bio}</p>
           </div>
         )}
       </div>
     </article>
   );
 }
+

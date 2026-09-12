@@ -229,3 +229,62 @@
     margin-top: 2rem;
   }
 }
+
+/* Arabic Post Styles */
+.arabicHeader {
+  direction: rtl;
+  text-align: right;
+}
+
+.arabicTitle {
+  font-family: var(--font-arabic), 'Amiri', 'Cairo', serif !important;
+  direction: rtl;
+  text-align: right;
+  line-height: 1.4 !important;
+  font-size: 3.2rem;
+  letter-spacing: 0;
+}
+
+.arabicContent {
+  font-family: var(--font-arabic), 'Amiri', 'Noto Naskh Arabic', serif !important;
+  direction: rtl !important;
+  text-align: right !important;
+  font-size: 1.35rem !important;
+  line-height: 2.2 !important;
+  word-spacing: 0.04em;
+}
+
+.arabicContent p {
+  margin-bottom: 2rem;
+}
+
+.arabicContent h1, .arabicContent h2, .arabicContent h3, .arabicContent h4 {
+  font-family: var(--font-arabic-heading), 'Cairo', var(--font-arabic), serif !important;
+  direction: rtl;
+  text-align: right;
+  line-height: 1.5;
+  margin-top: 3rem;
+  margin-bottom: 1.2rem;
+}
+
+.arabicContent blockquote {
+  border-left: none;
+  border-right: 4px solid var(--primary-color);
+  padding-left: 0;
+  padding-right: 1.5rem;
+  margin: 2.5rem 0;
+  font-style: normal;
+  font-size: 1.4rem;
+  line-height: 2.2;
+}
+
+@media (max-width: 768px) {
+  .arabicTitle {
+    font-size: 2.2rem;
+  }
+  .arabicContent {
+    font-size: 1.18rem !important;
+    line-height: 2.0 !important;
+  }
+}
+

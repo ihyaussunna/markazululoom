@@ -35,6 +35,8 @@ export default async function SettingsPage() {
               <label htmlFor="titleFont" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'bold' }}>Blog Title Font</label>
               <select id="titleFont" name="titleFont" defaultValue={currentTitleFont} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }}>
                 <option value="fkl-dhikk">FKL-Dhikk Bold (Local Font)</option>
+                <option value="amiri">Amiri (Arabic Literature / Poetry - أميري)</option>
+                <option value="cairo">Cairo (Modern Arabic / Headings - كايرو)</option>
                 <option value="anek-malayalam">Anek Malayalam</option>
                 <option value="manjari">Manjari</option>
                 <option value="inter">Inter</option>
@@ -50,6 +52,7 @@ export default async function SettingsPage() {
               <label htmlFor="uiFont" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'bold' }}>Website Font</label>
               <select id="uiFont" name="uiFont" defaultValue={currentUiFont} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }}>
                 <option value="inter">Inter</option>
+                <option value="cairo">Cairo (Modern Arabic - كايرو)</option>
                 <option value="raleway">Raleway</option>
                 <option value="ubuntu">Ubuntu</option>
                 <option value="poppins">Poppins</option>
@@ -62,6 +65,8 @@ export default async function SettingsPage() {
               <label htmlFor="textFont" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'bold' }}>Post Content Text Font</label>
               <select id="textFont" name="textFont" defaultValue={currentTextFont} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }}>
                 <option value="anek-malayalam">Anek Malayalam</option>
+                <option value="amiri">Amiri (Arabic Literature / Poetry - أميري)</option>
+                <option value="cairo">Cairo (Modern Arabic - كايرو)</option>
                 <option value="manjari">Manjari</option>
                 <option value="inter">Inter</option>
                 <option value="raleway">Raleway</option>

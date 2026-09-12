@@ -10,7 +10,8 @@ async function main() {
     'LITERATURE',
     'INTERVIEWS',
     'FAITH & THOUGHT',
-    'ARCHIVES'
+    'ARCHIVES',
+    'SAQAFA'
   ];
 
   for (const name of categories) {

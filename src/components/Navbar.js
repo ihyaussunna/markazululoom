@@ -5,8 +5,20 @@ import NavbarClient from './NavbarClient';
 import styles from './Navbar.module.css';
 
 export default async function Navbar() {
+  // Ensure SAQAFA category exists automatically
+  try {
+    const saqafa = await prisma.category.findUnique({ where: { slug: 'saqafa' } });
+    if (!saqafa) {
+      await prisma.category.create({
+        data: { name: 'SAQAFA', slug: 'saqafa' }
+      });
+    }
+  } catch (e) {
+    // Ignore concurrency/already exists
+  }
+
   const categories = await prisma.category.findMany({
-    take: 8,
+    take: 30,
     orderBy: { createdAt: 'asc' }
   });
 

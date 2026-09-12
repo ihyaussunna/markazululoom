@@ -1,11 +1,11 @@
 import "./globals.css";
 import { prisma } from '@/lib/prisma';
-import { fklDhikk, inter, raleway, ubuntu, poppins, montserrat, outfit, geo } from '@/lib/fonts';
+import { fklDhikk, inter, raleway, ubuntu, poppins, montserrat, outfit, geo, amiri, cairo } from '@/lib/fonts';
 import AuthProvider from '@/components/AuthProvider';
 
 export const metadata = {
   title: "Globeats",
-  description: "The ultimate destination for Malayalam blogs, essays, and literature.",
+  description: "The ultimate destination for Malayalam & Arabic blogs, essays, literature, and culture.",
 };
 
 export default async function RootLayout({ children }) {
@@ -39,6 +39,8 @@ export default async function RootLayout({ children }) {
       case 'montserrat': return 'var(--font-montserrat), sans-serif';
       case 'manjari': return "'Manjari', sans-serif";
       case 'anek-malayalam': return "'Anek Malayalam', sans-serif";
+      case 'amiri': return "var(--font-amiri), 'Amiri', 'Noto Naskh Arabic', serif";
+      case 'cairo': return "var(--font-cairo), 'Cairo', sans-serif";
       default: return "'Inter', sans-serif";
     }
   };
@@ -48,11 +50,13 @@ export default async function RootLayout({ children }) {
       --font-title-dynamic: ${getFontFamily(titleFont)};
       --font-text-dynamic: ${getFontFamily(textFont)};
       --font-ui-dynamic: ${getFontFamily(uiFont)};
+      --font-arabic: var(--font-amiri), 'Amiri', 'Noto Naskh Arabic', serif;
+      --font-arabic-heading: var(--font-cairo), 'Cairo', var(--font-amiri), 'Amiri', serif;
     }
   `;
 
   return (
-    <html lang="en" className={`${fklDhikk.variable} ${inter.variable} ${raleway.variable} ${ubuntu.variable} ${poppins.variable} ${montserrat.variable} ${outfit.variable} ${geo.variable}`}>
+    <html lang="en" className={`${fklDhikk.variable} ${inter.variable} ${raleway.variable} ${ubuntu.variable} ${poppins.variable} ${montserrat.variable} ${outfit.variable} ${geo.variable} ${amiri.variable} ${cairo.variable}`}>
       <head>
         <style dangerouslySetInnerHTML={{ __html: cssVariables }} />
         <script
