@@ -4,6 +4,7 @@ import styles from '../../admin.module.css';
 import Link from 'next/link';
 import AuthorSelector from '@/components/AuthorSelector';
 import CategorySelector from '@/components/CategorySelector';
+import RichTextEditor from '@/components/RichTextEditor';
 import { getCategories } from '@/lib/categories';
 
 export const dynamic = 'force-dynamic';
@@ -51,8 +52,10 @@ export default async function NewPostPage() {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <label htmlFor="content" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Content (Supports HTML & Arabic Text)</label>
-            <textarea id="content" name="content" dir="auto" required rows="10" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)', resize: 'vertical' }}></textarea>
+            <label htmlFor="content" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'bold' }}>
+              Content (Rich Text Editor - Side Headings, Bold, Italic, Quotes)
+            </label>
+            <RichTextEditor id="content" name="content" required={true} />
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>

@@ -145,10 +145,53 @@
   margin-bottom: 1.5rem;
 }
 
-.content h2, .content h3 {
-  font-family: 'Outfit', sans-serif;
-  margin: 2.5rem 0 1rem;
+.content h2 {
+  font-family: var(--font-title-dynamic), sans-serif;
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1.35;
+  color: var(--primary-color);
+  margin: 2.8rem 0 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid rgba(0, 74, 173, 0.12);
+}
+
+.content h3 {
+  font-family: var(--font-title-dynamic), sans-serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.35;
   color: var(--text-primary);
+  margin: 2.2rem 0 0.8rem;
+}
+
+.content strong, .content b {
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.content em, .content i {
+  font-style: italic;
+}
+
+.content u {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.content s {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+.content ul, .content ol {
+  padding-left: 2rem;
+  margin: 1.5rem 0;
+  line-height: 1.8;
+}
+
+.content li {
+  margin-bottom: 0.5rem;
 }
 
 .content img {
@@ -161,13 +204,18 @@
 .content a {
   color: var(--primary-color);
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .content blockquote {
   border-left: 4px solid var(--primary-color);
-  padding-left: 1rem;
+  padding: 0.8rem 1.4rem;
   font-style: italic;
+  font-size: 1.22rem;
+  line-height: 1.9;
   color: var(--text-secondary);
+  background-color: rgba(0, 74, 173, 0.04);
+  border-radius: 0 8px 8px 0;
   margin: 2rem 0;
 }
 
