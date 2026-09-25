@@ -1,12 +1,33 @@
 import { uploadMagazine } from '@/app/actions/magazines';
 import SubmitButton from '@/components/SubmitButton';
 import styles from '../../admin.module.css';
+import Link from 'next/link';
+
+export const dynamic = 'force-dynamic';
 
 export default function NewMagazinePage() {
   return (
     <div>
       <div className={styles.header}>
-        <h1>Create Magazine</h1>
+        <div>
+          <h1>Create Magazine</h1>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '0.2rem' }}>
+            Upload or configure a new issue of Globeats magazine
+          </p>
+        </div>
+        <Link 
+          href="/admin/magazines" 
+          style={{ 
+            color: 'var(--text-secondary)', 
+            textDecoration: 'none', 
+            display: 'inline-flex', 
+            alignItems: 'center', 
+            gap: '0.4rem', 
+            fontSize: '0.95rem' 
+          }}
+        >
+          ← Back to Magazines
+        </Link>
       </div>
 
       <div style={{ backgroundColor: 'var(--surface-color)', padding: '2rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
@@ -15,12 +36,12 @@ export default function NewMagazinePage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="title" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Title *</label>
-              <input type="text" id="title" name="title" required style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <input type="text" id="title" name="title" required placeholder="Magazine issue title" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="slug" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Slug (optional)</label>
-              <input type="text" id="slug" name="slug" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <input type="text" id="slug" name="slug" placeholder="custom-magazine-slug" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
           </div>
 
@@ -44,38 +65,56 @@ export default function NewMagazinePage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="author" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Author / Editor</label>
-              <input type="text" id="author" name="author" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <input type="text" id="author" name="author" placeholder="Editor or Author name" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="publisher" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Publisher</label>
-              <input type="text" id="publisher" name="publisher" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <input type="text" id="publisher" name="publisher" placeholder="Publisher name" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             <label htmlFor="description" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Description</label>
-            <textarea id="description" name="description" rows="3" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)', resize: 'vertical' }}></textarea>
+            <textarea id="description" name="description" rows="3" placeholder="Brief summary or description of this magazine issue" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)', resize: 'vertical' }}></textarea>
           </div>
 
           <hr style={{ borderColor: 'var(--border-color)', margin: '1rem 0' }} />
-          <h3>Media Options</h3>
+          <div>
+            <h3 style={{ margin: 0, fontSize: '1.15rem' }}>Media & Content Options</h3>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginTop: '0.25rem' }}>
+              Provide the magazine cover and content (either a direct PDF link or a list of image page URLs)
+            </p>
+          </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="image" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Cover Image (Upload)</label>
               <input type="file" id="image" name="image" accept="image/*" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Upload a JPG or PNG cover photo</span>
             </div>
-            
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <label htmlFor="pdfLink" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>PDF Link (Direct link to PDF file)</label>
-              <input type="url" id="pdfLink" name="pdfLink" placeholder="https://.../file.pdf" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <label htmlFor="coverImageUrl" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Or Cover Image URL</label>
+              <input type="url" id="coverImageUrl" name="coverImageUrl" placeholder="https://domain.com/cover.jpg" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Direct public image link (if not uploading file)</span>
             </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <label htmlFor="pageImagesUrlList" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Or Image Sequence URLs (One per line)</label>
-            <textarea id="pageImagesUrlList" name="pageImagesUrlList" rows="4" placeholder="https://domain.com/page1.jpg&#10;https://domain.com/page2.jpg" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)', resize: 'vertical' }}></textarea>
+            <label htmlFor="pdfLink" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>PDF File Link (Direct URL)</label>
+            <input type="url" id="pdfLink" name="pdfLink" placeholder="https://example.com/files/magazine.pdf" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+              Direct public link to the PDF file (e.g. from Google Drive, Cloudinary, AWS S3, or Archive.org)
+            </span>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <label htmlFor="pageImagesUrlList" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Or Page Images Sequence (One URL per line)</label>
+            <textarea id="pageImagesUrlList" name="pageImagesUrlList" rows="4" placeholder={'https://domain.com/page1.jpg\nhttps://domain.com/page2.jpg\nhttps://domain.com/page3.jpg'} style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)', resize: 'vertical' }}></textarea>
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+              Used if you prefer pages as sequential images instead of a single PDF file
+            </span>
           </div>
 
           <hr style={{ borderColor: 'var(--border-color)', margin: '1rem 0' }} />
@@ -84,18 +123,18 @@ export default function NewMagazinePage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="seoTitle" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>SEO Title</label>
-              <input type="text" id="seoTitle" name="seoTitle" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <input type="text" id="seoTitle" name="seoTitle" placeholder="Custom SEO title for Google" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <label htmlFor="tags" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Tags (Comma separated)</label>
-              <input type="text" id="tags" name="tags" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
+              <input type="text" id="tags" name="tags" placeholder="islam, history, culture, saqafa" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)' }} />
             </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             <label htmlFor="seoDescription" style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>SEO Description</label>
-            <textarea id="seoDescription" name="seoDescription" rows="2" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)', resize: 'vertical' }}></textarea>
+            <textarea id="seoDescription" name="seoDescription" rows="2" placeholder="Meta description for search engines" style={{ padding: '0.8rem', borderRadius: '6px', border: '1px solid var(--border-color)', backgroundColor: 'var(--bg-color)', color: 'var(--text-primary)', resize: 'vertical' }}></textarea>
           </div>
 
           <div style={{ display: 'flex', gap: '2rem', marginTop: '1rem', alignItems: 'center' }}>
@@ -114,10 +153,13 @@ export default function NewMagazinePage() {
             </div>
           </div>
 
-          <div style={{ marginTop: '2rem' }}>
+          <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', alignItems: 'center' }}>
             <SubmitButton className={styles.primaryBtn} loadingText="Saving..." successText="Created Successfully!">
               Create Magazine
             </SubmitButton>
+            <Link href="/admin/magazines" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem' }}>
+              Cancel
+            </Link>
           </div>
 
         </form>

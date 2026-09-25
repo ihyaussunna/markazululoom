@@ -2,9 +2,12 @@
 
 import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 function generateSlug(title) {
-  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') + '-' + Date.now();
+  if (!title) return 'magazine-' + Date.now();
+  const clean = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+  return (clean || 'magazine') + '-' + Date.now();
 }
 
 export async function uploadMagazine(formData) {
@@ -51,6 +54,8 @@ export async function uploadMagazine(formData) {
   const pageImagesStr = formData.get('pageImagesUrlList') || '';
   const pageImages = pageImagesStr ? JSON.stringify(pageImagesStr.split('\n').map(u => u.trim()).filter(Boolean)) : null;
 
+  coverImage = coverImage || '/placeholder-cover.jpg';
+
   try {
     await prisma.magazine.create({
       data: {
@@ -66,7 +71,6 @@ export async function uploadMagazine(formData) {
   revalidatePath('/magazines');
   revalidatePath('/admin/magazines');
   
-  const { redirect } = await import('next/navigation');
   redirect('/admin/magazines');
 }
 
@@ -172,7 +176,6 @@ export async function editMagazine(formData) {
   revalidatePath('/magazines');
   revalidatePath('/admin/magazines');
   
-  const { redirect } = await import('next/navigation');
   redirect('/admin/magazines');
 }
 

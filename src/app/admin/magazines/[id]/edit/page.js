@@ -3,6 +3,9 @@ import { notFound } from 'next/navigation';
 import { editMagazine } from '@/app/actions/magazines';
 import SubmitButton from '@/components/SubmitButton';
 import styles from '../../../admin.module.css';
+import Link from 'next/link';
+
+export const dynamic = 'force-dynamic';
 
 export default async function EditMagazinePage({ params }) {
   const resolvedParams = await params;
@@ -24,7 +27,25 @@ export default async function EditMagazinePage({ params }) {
   return (
     <div>
       <div className={styles.header}>
-        <h1>Edit Magazine</h1>
+        <div>
+          <h1>Edit Magazine</h1>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '0.2rem' }}>
+            Update magazine issue details and media
+          </p>
+        </div>
+        <Link 
+          href="/admin/magazines" 
+          style={{ 
+            color: 'var(--text-secondary)', 
+            textDecoration: 'none', 
+            display: 'inline-flex', 
+            alignItems: 'center', 
+            gap: '0.4rem', 
+            fontSize: '0.95rem' 
+          }}
+        >
+          ← Back to Magazines
+        </Link>
       </div>
 
       <div style={{ backgroundColor: 'var(--surface-color)', padding: '2rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
