@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { editMagazine } from '@/app/actions/magazines';
 import styles from '../../../admin.module.css';
 import Link from 'next/link';
 
@@ -20,21 +19,26 @@ export default function EditMagazineForm({ magazine, initialPageImagesText }) {
 
     try {
       const formData = new FormData(e.currentTarget);
-      const result = await editMagazine(formData);
+      const res = await fetch('/api/admin/magazines', {
+        method: 'PUT',
+        body: formData,
+      });
 
-      if (result?.error) {
-        setErrorMessage(result.error);
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        setErrorMessage(data.error || 'Failed to update magazine.');
         setSubmitting(false);
       } else {
         setSuccessMessage('Magazine updated successfully! Redirecting...');
         setTimeout(() => {
           router.push('/admin/magazines');
           router.refresh();
-        }, 1000);
+        }, 800);
       }
     } catch (err) {
       console.error('Edit error:', err);
-      setErrorMessage(err?.message || 'An unexpected error occurred while updating the magazine.');
+      setErrorMessage(err?.message || 'An unexpected network error occurred.');
       setSubmitting(false);
     }
   }

@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { uploadMagazine } from '@/app/actions/magazines';
 import styles from '../../admin.module.css';
 import Link from 'next/link';
 
@@ -20,21 +19,26 @@ export default function NewMagazinePage() {
 
     try {
       const formData = new FormData(e.currentTarget);
-      const result = await uploadMagazine(formData);
+      const res = await fetch('/api/admin/magazines', {
+        method: 'POST',
+        body: formData,
+      });
 
-      if (result?.error) {
-        setErrorMessage(result.error);
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        setErrorMessage(data.error || 'Failed to create magazine. Please try again.');
         setSubmitting(false);
       } else {
         setSuccessMessage('Magazine created successfully! Redirecting...');
         setTimeout(() => {
           router.push('/admin/magazines');
           router.refresh();
-        }, 1000);
+        }, 800);
       }
     } catch (err) {
       console.error('Submit error:', err);
-      setErrorMessage(err?.message || 'An unexpected error occurred while creating the magazine.');
+      setErrorMessage(err?.message || 'An unexpected network error occurred.');
       setSubmitting(false);
     }
   }
