@@ -63,15 +63,15 @@ export async function uploadMagazine(formData) {
         seoTitle, seoDescription, tags, status, isFeatured, pageImages, isActive: status === 'PUBLISHED'
       }
     });
+
+    revalidatePath('/magazines');
+    revalidatePath('/admin/magazines');
+
+    return { success: true };
   } catch (error) {
     console.error("Magazine upload error:", error);
-    return { error: 'Something went wrong while uploading' };
+    return { error: error.message || 'Something went wrong while uploading' };
   }
-
-  revalidatePath('/magazines');
-  revalidatePath('/admin/magazines');
-  
-  redirect('/admin/magazines');
 }
 
 export async function deleteMagazine(formData) {
@@ -168,14 +168,13 @@ export async function editMagazine(formData) {
       data: dataToUpdate
     });
 
+    revalidatePath('/magazines');
+    revalidatePath('/admin/magazines');
+
+    return { success: true };
   } catch (error) {
     console.error("Magazine edit error:", error);
     return { error: 'Something went wrong while editing: ' + error.message };
   }
-
-  revalidatePath('/magazines');
-  revalidatePath('/admin/magazines');
-  
-  redirect('/admin/magazines');
 }
 
