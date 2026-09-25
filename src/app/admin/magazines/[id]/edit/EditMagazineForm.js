@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../../../admin.module.css';
 import Link from 'next/link';
+import { compressImage } from '@/lib/imageCompressor';
 
 export default function EditMagazineForm({ magazine, initialPageImagesText }) {
   const router = useRouter();
@@ -18,16 +19,39 @@ export default function EditMagazineForm({ magazine, initialPageImagesText }) {
     setSuccessMessage('');
 
     try {
-      const formData = new FormData(e.currentTarget);
+      const formEl = e.currentTarget;
+      const formData = new FormData(formEl);
+
+      const imageFile = formData.get('image');
+      if (imageFile && imageFile.size > 0 && imageFile.type && imageFile.type.startsWith('image/')) {
+        if (imageFile.size > 700 * 1024) {
+          setSuccessMessage('Optimizing cover image for web...');
+        }
+        const compressed = await compressImage(imageFile);
+        formData.set('image', compressed);
+      }
+
+      setSuccessMessage('Saving magazine changes...');
+
       const res = await fetch('/api/admin/magazines', {
         method: 'PUT',
         body: formData,
       });
 
-      const data = await res.json();
+      const text = await res.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (parseErr) {
+        if (res.status === 413) {
+          throw new Error('The uploaded file is too large for the server (limit 4.5MB). Please use a smaller image or enter a direct Cover Image URL.');
+        }
+        throw new Error(`Server returned an error (${res.status}): ${text.slice(0, 100)}`);
+      }
 
       if (!res.ok || data.error) {
         setErrorMessage(data.error || 'Failed to update magazine.');
+        setSuccessMessage('');
         setSubmitting(false);
       } else {
         setSuccessMessage('Magazine updated successfully! Redirecting...');
@@ -39,6 +63,7 @@ export default function EditMagazineForm({ magazine, initialPageImagesText }) {
     } catch (err) {
       console.error('Edit error:', err);
       setErrorMessage(err?.message || 'An unexpected network error occurred.');
+      setSuccessMessage('');
       setSubmitting(false);
     }
   }
